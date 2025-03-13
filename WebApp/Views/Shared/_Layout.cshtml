@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
 </head>
 <body>
-  
+    @await Html.PartialAsync("Partials/Sections/Header")
+    @await Html.PartialAsync("Partials/Sections/MainNav")
     <div >
         <main >
             @RenderBody()

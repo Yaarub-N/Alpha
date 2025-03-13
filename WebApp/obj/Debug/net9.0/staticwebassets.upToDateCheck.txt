@@ -1,6 +1,0 @@
-C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\wwwroot\favicon.ico
-C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\wwwroot\js\site.js
-C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\wwwroot\css\site.css
-wwwroot\css\site.css
-wwwroot\favicon.ico
-wwwroot\js\site.js
