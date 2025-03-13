@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "C8xbTbBpDzBozKphHz/X/QF1wgb0xw9nTOIiDyJyj2E=",
+  "Hash": "kkJumVMN9d+XeBhGiaVq2p5C5w1OvSey7WxShtrbHHE=",
   "Source": "WebApp",
   "BasePath": "_content/WebApp",
   "Mode": "Default",
@@ -185,6 +185,27 @@
       "OriginalItemSpec": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Sections\\MainNavStyleSheet.css"
     },
     {
+      "Identity": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\obj\\Debug\\net9.0\\compressed\\u6j9176cdc-zmm9kci449.gz",
+      "SourceId": "WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/WebApp",
+      "RelativePath": "css/Auth/Auth#[.{fingerprint=zmm9kci449}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Auth\\Auth.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "5d0khpluug",
+      "Integrity": "2cOheqn2tPNluQNQhqYKGhyUUbkgCnqsoeSdZchFCkU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Auth\\Auth.css"
+    },
+    {
       "Identity": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\obj\\Debug\\net9.0\\compressed\\z1u8kdtlqo-m51om2iex5.gz",
       "SourceId": "WebApp",
       "SourceType": "Discovered",
@@ -204,6 +225,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\images\\alpha-logotype-light.svg"
+    },
+    {
+      "Identity": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Auth\\Auth.css",
+      "SourceId": "WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\",
+      "BasePath": "_content/WebApp",
+      "RelativePath": "css/Auth/Auth#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "zmm9kci449",
+      "Integrity": "2z7HVuHszoQUleq6aj4Vv2pfjJDgBN6sltqI0cBU8zQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Auth\\Auth.css"
     },
     {
       "Identity": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Sections\\HeaderStyleSheet.css",
@@ -396,6 +438,304 @@
     }
   ],
   "Endpoints": [
+    {
+      "Route": "css/Auth/Auth.css",
+      "AssetFile": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\obj\\Debug\\net9.0\\compressed\\u6j9176cdc-zmm9kci449.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001215066829"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "822"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2cOheqn2tPNluQNQhqYKGhyUUbkgCnqsoeSdZchFCkU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 22:07:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"2z7HVuHszoQUleq6aj4Vv2pfjJDgBN6sltqI0cBU8zQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2z7HVuHszoQUleq6aj4Vv2pfjJDgBN6sltqI0cBU8zQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/Auth/Auth.css",
+      "AssetFile": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Auth\\Auth.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3212"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2z7HVuHszoQUleq6aj4Vv2pfjJDgBN6sltqI0cBU8zQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 22:07:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2z7HVuHszoQUleq6aj4Vv2pfjJDgBN6sltqI0cBU8zQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/Auth/Auth.css.gz",
+      "AssetFile": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\obj\\Debug\\net9.0\\compressed\\u6j9176cdc-zmm9kci449.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "822"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2cOheqn2tPNluQNQhqYKGhyUUbkgCnqsoeSdZchFCkU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 22:07:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2cOheqn2tPNluQNQhqYKGhyUUbkgCnqsoeSdZchFCkU="
+        }
+      ]
+    },
+    {
+      "Route": "css/Auth/Auth.zmm9kci449.css",
+      "AssetFile": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\obj\\Debug\\net9.0\\compressed\\u6j9176cdc-zmm9kci449.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001215066829"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "822"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2cOheqn2tPNluQNQhqYKGhyUUbkgCnqsoeSdZchFCkU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 22:07:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"2z7HVuHszoQUleq6aj4Vv2pfjJDgBN6sltqI0cBU8zQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zmm9kci449"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Auth/Auth.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2z7HVuHszoQUleq6aj4Vv2pfjJDgBN6sltqI0cBU8zQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/Auth/Auth.zmm9kci449.css",
+      "AssetFile": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Auth\\Auth.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3212"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2z7HVuHszoQUleq6aj4Vv2pfjJDgBN6sltqI0cBU8zQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 22:07:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zmm9kci449"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Auth/Auth.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2z7HVuHszoQUleq6aj4Vv2pfjJDgBN6sltqI0cBU8zQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/Auth/Auth.zmm9kci449.css.gz",
+      "AssetFile": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\obj\\Debug\\net9.0\\compressed\\u6j9176cdc-zmm9kci449.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "822"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2cOheqn2tPNluQNQhqYKGhyUUbkgCnqsoeSdZchFCkU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 13 Mar 2025 22:07:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zmm9kci449"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Auth/Auth.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2cOheqn2tPNluQNQhqYKGhyUUbkgCnqsoeSdZchFCkU="
+        }
+      ]
+    },
     {
       "Route": "css/Sections/HeaderStyleSheet.css",
       "AssetFile": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\obj\\Debug\\net9.0\\compressed\\scfvo2ypt2-yvdaqduukv.gz",

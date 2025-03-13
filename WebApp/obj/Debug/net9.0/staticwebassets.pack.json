@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Auth\\Auth.css",
+      "PackagePath": "staticwebassets\\css\\Auth\\Auth.css"
+    },
+    {
       "Id": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Sections\\HeaderStyleSheet.css",
       "PackagePath": "staticwebassets\\css\\Sections\\HeaderStyleSheet.css"
     },

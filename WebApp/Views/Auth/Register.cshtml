@@ -1,1 +1,41 @@
-﻿<h1>Register</h1>
+﻿
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "Register";
+}
+
+<div class="form-container">
+    <h1>Create Account</h1>
+    <div class="googlebox"> <img src="~/images/google-icon.svg" alt="google icon" /> <a href="#">Sign Up with Google</a></div>
+
+    <span>OR</span>
+
+    <form>
+        <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" placeholder="Your first name">
+        </div>
+        <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" placeholder="Your last name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Your email address">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+        </div>
+        <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm your password">
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="terms">
+            <span class="terms-text">I accept <a href="#" class="terms-link">Terms and Conditions</a></span>
+        </div>
+        <button type="submit" class="btn-create">Create Account</button>
+    </form>
+    <div class="login-link">
+        Already have an account? <a href="#">Login</a>
