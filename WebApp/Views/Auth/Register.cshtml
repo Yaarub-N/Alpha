@@ -1,4 +1,7 @@
 ﻿
+@model RegisterFormModel
+
+
 @{
     Layout = "_AuthLayout";
     ViewData["Title"] = "Register";
@@ -8,28 +11,33 @@
     <h1>Create Account</h1>
     <div class="googlebox"> <img src="~/images/google-icon.svg" alt="google icon" /> <a href="#">Sign Up with Google</a></div>
 
-    <span>OR</span>
+    <span class="or">OR</span>
 
-    <form>
+    <form method="post" asp-controller="Auth" asp-action="Register" novalidate>
         <div class="form-group">
-            <label for="firstname">First Name</label>
-            <input type="text" id="firstname" placeholder="Your first name">
+            <label asp-for="FirstName"></label>
+            <input  asp-for="FirstName">
+            <span asp-validation-for="FirstName"></span>
         </div>
         <div class="form-group">
-            <label for="lastname">Last Name</label>
-            <input type="text" id="lastname" placeholder="Your last name">
+            <label asp-for="LastName"></label>
+            <input  asp-for="LastName" >
+            <span asp-validation-for="LastName"></span>
         </div>
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Your email address">
+            <label asp-for="Email"></label>
+            <input  asp-for="Email" >
+            <span asp-validation-for="Email"></span>
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password">
+            <label asp-for="Password"></label>
+            <input  asp-for="Password" >
+            <span asp-validation-for="Password"></span>
         </div>
         <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" placeholder="Confirm your password">
+            <label asp-for="ConfirmPassword"></label>
+            <input type="password" asp-for="ConfirmPassword" >
+            <span asp-validation-for="Password"></span>
         </div>
         <div class="checkbox-group">
             <input type="checkbox" id="terms">

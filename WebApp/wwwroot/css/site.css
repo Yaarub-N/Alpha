@@ -54,6 +54,7 @@
     --navlink-active-background: var( --light-blue);
     --nav-link: var(--dark-400);
     --Auth-light-background: var(--white-100);
+    --Error-color:var(--red)
 }
 
 [data-theme="dark"] {
@@ -69,6 +70,7 @@
     --light-background: var(--dark-450);
     --Auth-light-background: var(--dark-200);
     --text-2: var(--gray-700);
+    --Error-color: var(--red-dark)
 }
 
 html, body {

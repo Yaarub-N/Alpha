@@ -3,7 +3,6 @@
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
     width: 600px;
-    max-height: 900px;
     padding: 5rem;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -46,7 +45,7 @@
     }
 
 
-.form-container span {
+.form-container .or{
     display: flex;
     align-items: center;
     text-align: center;
@@ -55,20 +54,20 @@
     font-size: 14px;
 }
 
-    .form-container span::before,
-    .form-container span::after {
-        content: '';
-        flex: 1;
-        border-bottom: 1px solid var(--border);
-    }
+.form-container .or::before,
+.form-container .or::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border);
+}
 
-    .form-container span::before {
-        margin-right: 1rem;
-    }
+.form-container .or::before {
+    margin-right: 1rem;
+}
 
-    .form-container span::after {
-        margin-left: 1rem;
-    }
+.form-container .or::after {
+    margin-left: 1rem;
+}
 
 .form-group {
     margin-bottom: 1rem;
@@ -158,3 +157,9 @@ input[type="checkbox"] {
         text-decoration: none;
         font-weight: 600;
     }
+
+.form-container .field-validation-error {
+    color: var(--Error-color);
+    font-size: 12px;
+    text-align: center;
+}

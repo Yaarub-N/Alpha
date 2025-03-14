@@ -18,7 +18,6 @@ C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\WebApp
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\scopedcss\bundle\WebApp.styles.css
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\compressed\scfvo2ypt2-yvdaqduukv.gz
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\compressed\sy7kqm02aw-oxcjyzz7j3.gz
-C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\compressed\fspdjdrw69-gnfd50qc8b.gz
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\compressed\15ykilufbm-61n19gt1b8.gz
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\compressed\ag3lgb5hn7-w0jnanajey.gz
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\compressed\z1u8kdtlqo-m51om2iex5.gz
@@ -40,4 +39,5 @@ C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\refint
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\WebApp.pdb
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\WebApp.genruntimeconfig.cache
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\ref\WebApp.dll
-C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\compressed\u6j9176cdc-zmm9kci449.gz
+C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\compressed\u6j9176cdc-pwyjub9017.gz
+C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\obj\Debug\net9.0\compressed\fspdjdrw69-3twsgsf6t8.gz
