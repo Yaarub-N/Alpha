@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>rv1d6ke96y</Fingerprint>
-      <Integrity>Of8GcZpzcUSS6q+Xb3u2LfhvHtJADRFqAtI86mUTco8=</Integrity>
+      <Fingerprint>7r8oxocv8w</Fingerprint>
+      <Integrity>U+MUAS3gEI0eH9jaS1MEs8zt2qc5F/kI5SPdbD1cNTI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Auth\Auth.css'))</OriginalItemSpec>

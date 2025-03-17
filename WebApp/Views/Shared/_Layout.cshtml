@@ -16,8 +16,8 @@
     
 
     <div class="portal">
-        @await Html.PartialAsync("Partials/Sections/Header")
-        @await Html.PartialAsync("Partials/Sections/MainNav")
+          <partial name="Partials/Sections/_Header"/>
+          <partial name="Partials/Sections/_MainNav" />
         <main >
             @RenderBody()
         </main>

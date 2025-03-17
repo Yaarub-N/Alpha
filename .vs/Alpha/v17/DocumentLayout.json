@@ -1,0 +1,346 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\shared\\partials\\sections\\_mainnav.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\shared\\partials\\sections\\_mainnav.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\shared\\partials\\sections\\_header.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\shared\\partials\\sections\\_header.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\shared\\partials\\components\\_navlinks.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\shared\\partials\\components\\_navlinks.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\admin\\clients.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\admin\\clients.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\controllers\\projectscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\controllers\\projectscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\projects\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\projects\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\wwwroot\\css\\auth\\auth.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\wwwroot\\css\\auth\\auth.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\models\\authmodels\\registermodels\\registerformmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\models\\authmodels\\registermodels\\registerformmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\views\\shared\\_authlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\views\\shared\\_authlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\wwwroot\\css\\sections\\mainnavstylesheet.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\wwwroot\\css\\sections\\mainnavstylesheet.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|c:\\users\\yaaru\\documents\\asp.net1\\inlamning\\alpha\\webapp\\wwwroot\\css\\sections\\headerstylesheet.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4FEB3C2C-B061-4AA7-A6EE-1BB523DDEBE1}|WebApp\\WebApp.csproj|solutionrelative:webapp\\wwwroot\\css\\sections\\headerstylesheet.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_NavLinks.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Shared\\Partials\\Components\\_NavLinks.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\Shared\\Partials\\Components\\_NavLinks.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Shared\\Partials\\Components\\_NavLinks.cshtml",
+              "RelativeToolTip": "WebApp\\Views\\Shared\\Partials\\Components\\_NavLinks.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-17T14:53:53.659Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "WebApp\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "WebApp\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T14:46:03.084Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Clients.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Admin\\Clients.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\Admin\\Clients.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Admin\\Clients.cshtml",
+              "RelativeToolTip": "WebApp\\Views\\Admin\\Clients.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-17T14:47:56.495Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "WebApp\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T21:00:10.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Header.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Shared\\Partials\\Sections\\_Header.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\Shared\\Partials\\Sections\\_Header.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Shared\\Partials\\Sections\\_Header.cshtml",
+              "RelativeToolTip": "WebApp\\Views\\Shared\\Partials\\Sections\\_Header.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T20:52:28.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_MainNav.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Shared\\Partials\\Sections\\_MainNav.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\Shared\\Partials\\Sections\\_MainNav.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Shared\\Partials\\Sections\\_MainNav.cshtml*",
+              "RelativeToolTip": "WebApp\\Views\\Shared\\Partials\\Sections\\_MainNav.cshtml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T20:52:40.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Projects\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\Projects\\Index.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Projects\\Index.cshtml",
+              "RelativeToolTip": "WebApp\\Views\\Projects\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-17T14:48:06.024Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ProjectsController.cs",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Controllers\\ProjectsController.cs",
+              "RelativeDocumentMoniker": "WebApp\\Controllers\\ProjectsController.cs",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Controllers\\ProjectsController.cs",
+              "RelativeToolTip": "WebApp\\Controllers\\ProjectsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T20:43:36.575Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Program.cs",
+              "RelativeDocumentMoniker": "WebApp\\Program.cs",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Program.cs",
+              "RelativeToolTip": "WebApp\\Program.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAwwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T22:07:09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Auth\\Register.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\Auth\\Register.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Auth\\Register.cshtml",
+              "RelativeToolTip": "WebApp\\Views\\Auth\\Register.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAIwDsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T21:48:40.501Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "WebApp\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "WebApp\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-13T20:51:55.47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Auth.css",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Auth\\Auth.css",
+              "RelativeDocumentMoniker": "WebApp\\wwwroot\\css\\Auth\\Auth.css",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Auth\\Auth.css",
+              "RelativeToolTip": "WebApp\\wwwroot\\css\\Auth\\Auth.css",
+              "ViewState": "AgIAAKcAAAAAAAAAAAAAALoAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-13T22:05:27.726Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Auth\\Login.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Auth\\Login.cshtml",
+              "RelativeToolTip": "WebApp\\Views\\Auth\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T21:48:21.788Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "WebApp\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T21:00:05.846Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "WebApp\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T22:42:46.798Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "RegisterFormModel.cs",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Models\\AuthModels\\RegisterModels\\RegisterFormModel.cs",
+              "RelativeDocumentMoniker": "WebApp\\Models\\AuthModels\\RegisterModels\\RegisterFormModel.cs",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Models\\AuthModels\\RegisterModels\\RegisterFormModel.cs",
+              "RelativeToolTip": "WebApp\\Models\\AuthModels\\RegisterModels\\RegisterFormModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T22:29:33.222Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "WebApp\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "WebApp\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAkAAACQpzZf2PoDwBcAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T21:44:19.763Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "_AuthLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Shared\\_AuthLayout.cshtml",
+              "RelativeDocumentMoniker": "WebApp\\Views\\Shared\\_AuthLayout.cshtml",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\Views\\Shared\\_AuthLayout.cshtml",
+              "RelativeToolTip": "WebApp\\Views\\Shared\\_AuthLayout.cshtml",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAiwA4AAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T22:01:38.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "MainNavStyleSheet.css",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Sections\\MainNavStyleSheet.css",
+              "RelativeDocumentMoniker": "WebApp\\wwwroot\\css\\Sections\\MainNavStyleSheet.css",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Sections\\MainNavStyleSheet.css",
+              "RelativeToolTip": "WebApp\\wwwroot\\css\\Sections\\MainNavStyleSheet.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-13T20:59:16.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "HeaderStyleSheet.css",
+              "DocumentMoniker": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Sections\\HeaderStyleSheet.css",
+              "RelativeDocumentMoniker": "WebApp\\wwwroot\\css\\Sections\\HeaderStyleSheet.css",
+              "ToolTip": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\WebApp\\wwwroot\\css\\Sections\\HeaderStyleSheet.css",
+              "RelativeToolTip": "WebApp\\wwwroot\\css\\Sections\\HeaderStyleSheet.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-13T20:58:00.37Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
