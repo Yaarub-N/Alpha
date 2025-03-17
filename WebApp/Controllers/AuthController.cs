@@ -20,7 +20,9 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult Register( RegisterFormModel form)
         {
-           
+            if (!ModelState.IsValid)
+                return View();
+
             return View(form);
         } 
         

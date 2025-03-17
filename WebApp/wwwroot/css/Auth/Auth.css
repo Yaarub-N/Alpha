@@ -157,9 +157,37 @@ input[type="checkbox"] {
         text-decoration: none;
         font-weight: 600;
     }
+.form-container .form-box {
+    position: relative;
+    background-color:transparent;   
+}
 
+.form-container .validationSpan {
+    display: block;
+    height:1rem;
+}
 .form-container .field-validation-error {
     color: var(--Error-color);
+    display: block;
     font-size: 12px;
-    text-align: center;
+padding:0.5rem;
+max-height:1rem;
 }
+
+    .form-container .field-validation-error::after {
+        content: '\f071';
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 1.2em;
+        position: absolute;
+        right: 0;
+        color: var(--Error-color);
+        padding: 0.5rem 1rem;
+        margin-right: 0.3rem;
+        bottom: 38%;
+        border-radius: 8px;
+        text-align: end;
+        background-color: var(--background-Error-red);
+        z-index: 2;
+    }
+

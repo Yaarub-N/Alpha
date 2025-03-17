@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -26,6 +27,7 @@
     --dark-600: #38383B;
     --dark-450: #313133;
     --yellow: #FFD422;
+    --light-red: #ff00002e;
     --ligth-gray: #f5f7fa;
     --yellow-dark: #FCBB42;
     --orange: #FF9640;
@@ -54,7 +56,8 @@
     --navlink-active-background: var( --light-blue);
     --nav-link: var(--dark-400);
     --Auth-light-background: var(--white-100);
-    --Error-color:var(--red)
+    --Error-color: var(--red);
+    --background-Error-red: var(--light-red);
 }
 
 [data-theme="dark"] {
@@ -70,7 +73,8 @@
     --light-background: var(--dark-450);
     --Auth-light-background: var(--dark-200);
     --text-2: var(--gray-700);
-    --Error-color: var(--red-dark)
+    --Error-color: var(--red-dark) ;
+    --background-Error-red: var(--light-red);
 }
 
 html, body {
