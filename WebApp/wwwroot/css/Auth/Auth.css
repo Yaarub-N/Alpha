@@ -17,32 +17,32 @@
         color: var(--text);
     }
 
-.googlebox {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    background-color: var(--light-background);
-    border-radius: 8px;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-    .googlebox:hover {
-        background-color: var(--blue-accent);
+    .form-container .googlebox {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        background-color: var( --auth-background);
+        border-radius: 8px;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
     }
 
-    .googlebox i {
-        align-self: self-start;
-    }
+        .form-container .googlebox:hover {
+            background-color: var(--blue-accent);
+        }
+
+        .form-container .googlebox i {
+            align-self: self-start;
+        }
 
 
-    .googlebox a {
-        text-decoration: none;
-        color: var(--text);
-        text-align: center;
-        font-weight: 500;
-    }
+        .form-container .googlebox a {
+            text-decoration: none;
+            color: var(--text);
+            text-align: center;
+            font-weight: 500;
+        }
 
 
 .form-container .or{
@@ -69,36 +69,36 @@
     margin-left: 1rem;
 }
 
-.form-group {
-    margin-bottom: 1rem;
-}
+    .form-container .form-group {
+        margin-bottom: 1rem;
+    }
 
-    .form-group label {
-        display: block;
+        .form-container .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+    .form-container .form-group input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        outline: none;
+        background-color: var(--light-background);
+        transition: border-color 0.2s;
         font-size: 14px;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
         color: var(--text);
     }
 
-input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    outline: none;
-    background-color: var(--light-background);
-    transition: border-color 0.2s;
-    font-size: 14px;
-    color: var(--text);
-}
+        .form-container .form-group input::placeholder {
+            color: var(--text-2);
+            font-size: 14px;
+        }
 
-    input::placeholder {
-        color: var(--text-2);
-        font-size: 14px;
-    }
-
-    input:focus {
+    .form-container input:focus {
         border-color: var(--blue-accent);
     }
 
@@ -115,18 +115,18 @@ input[type="checkbox"] {
     accent-color: var(--blue-accent);
 }
 
-.terms-text {
+.form-container .terms-text {
     color: var(--text);
     font-size: 14px;
 }
 
-.terms-link {
+.form-container .terms-link {
     color: var(--blue-accent);
     text-decoration: none;
     font-weight: 500;
 }
 
-.btn-create {
+.form-container .btn-create {
     display: block;
     width: 100%;
     padding: 0.75rem;
@@ -134,8 +134,8 @@ input[type="checkbox"] {
     color: var(--white-100);
     border: none;
     border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
     transition: background-color 0.2s;
     margin-top: 0.5rem;
@@ -145,14 +145,14 @@ input[type="checkbox"] {
         background-color: var(--darkaccent);
     }
 
-.login-link {
+.form-container .login-link {
     text-align: center;
     margin-top: 1.5rem;
     color: var(--text);
     font-size: 14px;
 }
 
-    .login-link a {
+    .form-container .login-link a {
         color: var(--blue-accent);
         text-decoration: none;
         font-weight: 600;

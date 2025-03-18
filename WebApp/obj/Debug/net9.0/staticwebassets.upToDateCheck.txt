@@ -6,8 +6,10 @@ C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\wwwroot\images\google-i
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\wwwroot\images\avatar.svg
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\wwwroot\css\Sections\HeaderStyleSheet.css
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\wwwroot\css\Sections\MainNavStyleSheet.css
+C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\wwwroot\css\Admin\Admin.css
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\wwwroot\css\Auth\Auth.css
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\WebApp\wwwroot\images\alpha-logotype-light.svg
+wwwroot\css\Admin\Admin.css
 wwwroot\css\Auth\Auth.css
 wwwroot\css\Sections\HeaderStyleSheet.css
 wwwroot\css\Sections\MainNavStyleSheet.css
