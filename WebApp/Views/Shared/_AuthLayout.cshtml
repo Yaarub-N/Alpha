@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> @(ViewData["Title"] == null ? "Alpha Portal" : ViewData["Title"] + " - Alpha Portal")</title>
+    <script type="importmap"></script>
+
+        
+    <script src="https://kit.fontawesome.com/6c755fe0c3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Auth/Auth.css" asp-append-version="true" />
+
+</head>
+<body>
+
+
+    <div class="auth">
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+  
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

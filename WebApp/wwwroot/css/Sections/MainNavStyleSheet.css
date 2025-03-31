@@ -1,0 +1,23 @@
+﻿
+.nav-links {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+    .nav-links .nav-link {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        text-decoration: none;
+        color: var(--nav-link);
+        padding: 1rem 2rem;
+        font-weight: 600;
+        border-radius: 16px;
+        transition: 0.3s;
+    }
+
+        .nav-links .nav-link:hover {
+            color: var(--navlink-active-text);
+            background-color: var(--navlink-active-background);
+        }
