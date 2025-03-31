@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> @(ViewData["Title"] == null ? "Alpha Portal" : ViewData["Title"] + " - Alpha Portal")</title>
+    <script type="importmap"></script>
+
+ 
+    <script src="https://kit.fontawesome.com/6c755fe0c3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Sections/HeaderStyleSheet.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Sections/MainNavStyleSheet.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin/Admin.css" asp-append-version="true"/>
+</head>
+<body>
+    
+
+    <div class="portal">
+          <partial name="Partials/Sections/_Header"/>
+          <partial name="Partials/Sections/_MainNav" />
+        <main >
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,203 @@
+﻿
+.adminContainer {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+}
+
+    .adminContainer .page-headline {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+    }
+
+        .adminContainer .page-headline h1 {
+            font-size: 32px;
+            font-weight: var(--font-bold)
+        }
+
+.button-blue {
+    cursor: pointer;
+    border-radius: 16px;
+    font-size: 1em;
+    font-weight: var(--font-regular);
+    font-family: var(--font-standard);
+    padding: 0.7rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none;
+    background-color: transparent;
+    color: var(--white-100);
+    background-color: var(--blue-accent);
+}
+
+ .button-blue{
+
+}
+ .button-blue:hover {
+        background-color: var(--darkaccent);
+    }
+.adminContainer .page-headline .button-blue::before {
+    content: '\2b';
+    font-family: var(--font-fa-pro);
+}
+
+    .adminContainer .content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 2rem 0;
+        height: 100%;
+    }
+
+    .adminContainer .content .surface {
+        background-color: var( --light-background);
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: var(--box-shadow-surface);
+      
+     
+
+    }
+
+
+    /*modal*/
+
+.admin-modal {
+ display:none;
+    background-color: var(--modal-screen-background-color);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+}
+/*display*/
+.flex {
+    display: flex;
+}
+
+
+.admin-modal > .modal-container {
+    background-color: var(--modal-background-color);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--box-shadow-modal);
+}
+
+        .admin-modal > .modal-container .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text);
+            min-width:550px;
+        }
+
+.modal-container .modal-header h3 {
+    font-size: 28px;
+    font-weight: var(--font-bold);
+}
+
+
+.modal-container .btn-close {
+    font-size: 2em;
+    color: var(--text-color);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.1s ease-in-out;
+}
+
+    .modal-container .btn-close::before {
+        content: '\f00d';
+        font-family: "Font Awesome 6 Free";
+        font-weight: 600;
+        font-size: 1em;
+      background-color:transparent;
+      border:none;
+      cursor:pointer;
+      transition:0.3s ease-in-out;
+   
+    }
+    .modal-container .btn-close:hover {
+        color: var(--text-2);
+    }
+
+/* forms */
+.admin-modal form {
+    margin:2rem 0;
+    width: 100%;
+    position: relative;
+}
+
+    .admin-modal form input,
+    .admin-modal form select,
+    .admin-modal form textarea {
+        width: 100%;
+        font-size: 1em;
+        padding: 0.5rem 1rem;
+        border-radius: 16px;
+        border: 1px solid var(--text);
+        transition: border-color 0.1s ease-in-out;
+        outline: none;
+    }
+
+        .admin-modal form input:focus,
+        .admin-modal form select:focus,
+        .admin-modal form textarea:focus {
+            border-color: var(--border-focus-color);
+        }
+
+        .admin-modal form input::placeholder,
+        .admin-modal form select::placeholder,
+        .admin-modal form textarea::placeholder {
+            color: var(--text-2);
+            font-size: 0.9em;
+        }
+
+    .admin-modal form .form-group {
+        position: relative;
+        display: grid;
+        gap: 0.2rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .admin-modal form .field-group {
+        position: relative;
+    }
+
+.admin-modal .input-validation-error,
+.admin-modal .input-validation-error:focus {
+    border-color: var(--background-Error-red);
+}
+
+.admin-modal .field-validation-error {
+    background-color: var(--background-Error-red);
+    color: var(--Error-color);
+    font-size: 0.8em;
+    padding: 0.48em 1rem;
+    border-radius: 14px;
+    position: absolute;
+    top: 3px;
+    right: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+    .admin-modal .field-validation-error::before {
+        content: '\f071';
+        font-family: "Font Awesome 6 Free";
+        font-weight:600;
+        font-size: 1.2em;
+    }
+
+
+.admin-modal .button-blue{
+    width:100%;
+    text-align:center;
+}
