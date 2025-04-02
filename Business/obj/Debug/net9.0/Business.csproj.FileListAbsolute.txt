@@ -14,3 +14,5 @@ C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\Business\bin\Debug\net9.0\Data
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\Business\bin\Debug\net9.0\Data.pdb
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\Business\obj\Debug\net9.0\Business.csproj.AssemblyReference.cache
 C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\Business\obj\Debug\net9.0\Business.csproj.Up2Date
+C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\Business\bin\Debug\net9.0\Domain.dll
+C:\Users\yaaru\Documents\Asp.net1\Inlamning\Alpha\Business\bin\Debug\net9.0\Domain.pdb

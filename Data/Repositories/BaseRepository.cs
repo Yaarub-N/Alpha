@@ -1,4 +1,5 @@
 ﻿using Data.Contexts;
+using Data.IRepositories;
 using Data.Models;
 using Domain.Extentions;
 using Microsoft.EntityFrameworkCore;
@@ -102,15 +103,11 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
         var data = select != null
             ? await query.Select(select).ToListAsync()
             : (await query.ToListAsync()).Select(x => x.MapTo<TModel>()).ToList();
-
+         
         //____
 
         return new RepositoryResult<IEnumerable<TModel>>
-        {
-            Succeeded = true,
-            Result = data,
-            statusCode = 200
-        };
+        { Succeeded = true, Result = data,  statusCode = 200 };
     }
 
 
@@ -134,16 +131,6 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
         var result = entity.MapTo<TModel>();
         return new RepositoryResult<TModel?> { Succeeded = true, Result = result, statusCode = 200 };
     }
-
-
-
-
-
-
-
-
-
-
 
 
 

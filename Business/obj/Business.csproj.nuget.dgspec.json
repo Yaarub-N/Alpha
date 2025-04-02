@@ -35,6 +35,9 @@
             "projectReferences": {
               "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\Data\\Data.csproj": {
                 "projectPath": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\Data\\Data.csproj"
+              },
+              "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\yaaru\\Documents\\Asp.net1\\Inlamning\\Alpha\\Domain\\Domain.csproj"
               }
             }
           }
