@@ -1,4 +1,5 @@
 ﻿using Business.Models;
+using Domain.Models;
 
 namespace Business.Interfaces
 {
@@ -6,7 +7,7 @@ namespace Business.Interfaces
     {
         Task<UserResult> AddUserToRoleAsync(string userId, string roleName);
         Task<UserResult> CreatUserAsync(SignUpFormData form, string roleName = "User");
-        Task<UserResult> GetAllUsersAsync(string id);
-
+        Task<UserResult<IEnumerable<User>>> GetAllUsersAsync();
+        Task<UserResult> GetUserByIdAsync(string id);
     }
 }

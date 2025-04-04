@@ -4,6 +4,7 @@ using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
 using Data.IRepositories;
+using Data.Repositories;
 using Domain.Extentions;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
@@ -17,15 +18,38 @@ public class UserService(IUserRepository userRepository, RoleManager<IdentityRol
     private readonly RoleManager<IdentityRole> _roleManager = roleManager;
     private readonly UserManager<UserEntity> _userManager = userManager;
 
-    public async Task<UserResult> GetAllUsersAsync(string id)
+
+
+    public async Task<UserResult<IEnumerable<User>>> GetAllUsersAsync()
     {
-        var result = await _userRepository.GetAllAsync();
-        return result.MapTo<UserResult>();
+        var projects = await _userRepository.GetAllAsync(
+       orderByDescending: true,
+       where: null,
+
+       //Params förväntar sig en lista av lambda-uttryck – inte flera includes => som du skriver.
+       includes:
+       [
+        x => x.Projects,
+       ]
+   );
+        return projects.MapTo<UserResult<IEnumerable<User>>>();
     }
+
+    public async Task<UserResult> GetUserByIdAsync(string id)
+    {
+        var user = await _userRepository.GetAsync(
+            where: x => x.Id == id,
+            includes: x => x.Projects
+        );
+        return user.MapTo<UserResult>();
+    }
+
 
     public async Task<UserResult> AddUserToRoleAsync(string userId, string roleName)
     {
-        if (!await _roleManager.RoleExistsAsync(roleName))
+
+        var exist = await _roleManager.RoleExistsAsync(roleName);
+        if (!exist)
         {
             return new UserResult { Succeeded = false, StatusCode = 404, ErrorMessage = "Role does't exists" };
         }
@@ -45,14 +69,17 @@ public class UserService(IUserRepository userRepository, RoleManager<IdentityRol
 
 
     }
-    public async Task <UserResult> CreatUserAsync(SignUpFormData form, string roleName="User")
+
+
+
+    public async Task<UserResult> CreatUserAsync(SignUpFormData form, string roleName = "User")
     {
-      if(form == null)
+        if (form == null)
         {
             return new UserResult { Succeeded = false, StatusCode = 400, ErrorMessage = "Form data can't be null." };
         }
         var exists = await _userRepository.ExistAsync(x => x.Email == form.Email);
-      if (exists.Succeeded)
+        if (exists.Succeeded)
         {
             return new UserResult { Succeeded = false, StatusCode = 409, ErrorMessage = "User already exists." };
         }
@@ -65,13 +92,13 @@ public class UserService(IUserRepository userRepository, RoleManager<IdentityRol
             var result = await _userManager.CreateAsync(userEntity, form.Password);
             if (result.Succeeded)
             {
-               
-                    var roleResult = await AddUserToRoleAsync(userEntity.Id, roleName);
-                    if (!roleResult.Succeeded)
-                    {
-                        return new UserResult { Succeeded = false, StatusCode = 201, ErrorMessage = "Failed to add user to role" };
-                    }
-                
+
+                var roleResult = await AddUserToRoleAsync(userEntity.Id, roleName);
+                if (!roleResult.Succeeded)
+                {
+                    return new UserResult { Succeeded = false, StatusCode = 201, ErrorMessage = "Failed to add user to role" };
+                }
+
                 return new UserResult { Succeeded = true, StatusCode = 201 };
             }
         }

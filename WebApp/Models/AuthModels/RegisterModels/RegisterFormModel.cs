@@ -28,7 +28,10 @@ namespace WebApp.Models.AuthModels.RegisterModels
         [Display(Name ="Confirm Password", Prompt = "Enter your password")]
         [Required(ErrorMessage = "You must confirm your password")]
         [DataType(DataType.Password)]
-        [Compare(nameof(Password),ErrorMessage ="Your password do not mutch!")]
+        [Compare(nameof(Password),ErrorMessage ="Your password do not mutch!")] 
         public string ConfirmPassword { get; set; } = null!;
+
+       // [Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the terms and conditions")]
+        public bool TermsAndConditions { get; set; }
     }
 }

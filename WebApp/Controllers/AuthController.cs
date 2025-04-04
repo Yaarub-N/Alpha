@@ -1,50 +1,92 @@
 ﻿using Business.Interfaces;
 using Business.Models;
-using Business.Services;
+using Domain.Extentions;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WebApp.Models.AuthModels.RegisterModels;
 
 
 
-namespace WebApp.Controllers
+namespace WebApp.Controllers;
+
+
+public class AuthController(IAuthService authService, IUserService userService) : Controller
 {
-    public class AuthController : Controller
+
+    private readonly IAuthService _authService = authService;
+    private readonly IUserService _userService = userService;
+
+    [HttpPost]
+    public  async Task<IActionResult> Login(SignInFromModel model, string returnUrl = "~/")
     {
-        private readonly IAuthService _authService;
-        [HttpPost]
-        public IActionResult Login( SignInFromModel form)
+
+
+        if (ModelState.IsValid)
         {
-            if (!ModelState.IsValid)
+            var signInFormData = model.MapTo<SignInFormData>();
+            var authResult = await _authService.SignInAsync(signInFormData);
+
+            if (authResult.Succeeded)
             {
-                return View(form); // Returnera formuläret med felmeddelanden
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userResult = await _userService.GetUserByIdAsync(userId!);
+                var user = userResult.Result;
+
+                return LocalRedirect(returnUrl);
             }
-            // Fortsätta med inloggningslogik
-            return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Register( RegisterFormModel form)
-        {
-            // Lägg till ett explicit fel
-            ModelState.AddModelError("", "Test error message");
-
-            if (!ModelState.IsValid)
-            {
-                return View(form);
-            }
-            return RedirectToAction("Login");
-        } 
-        
-      
+        ViewBag.ReturnUrl = returnUrl;
+        ViewBag.ErrorMessage = "Unable to login. Try another email or password.";
+        return View(model);
     }
+
+    public IActionResult Login(string returnUrl = "~/")
+    {
+        ViewBag.ReturnUrl = returnUrl;
+        ViewBag.ErrorMessage = "";
+
+        return View();
+    }
+
+    public IActionResult Register(string returnUrl = "~/")
+    {
+        ViewBag.ReturnUrl = returnUrl;
+        ViewBag.ErrorMessage = "";
+
+        return View();
+    }
+
+    [HttpPost]
+    public async Task< IActionResult> Register(RegisterFormModel model, string returnUrl = "~/")
+    {
+        if (!ModelState.IsValid)
+        {
+            ViewBag.ReturnUrl = returnUrl;  
+            ViewBag.ErrorMessage = "";
+            return View(model);
+        }
+
+        var signUpFormData = model.MapTo<SignUpFormData>();
+        var authResult = await _authService.SignUpAsync(signUpFormData);
+
+        if (authResult.Succeeded)
+        {
+            return LocalRedirect(returnUrl);
+        }
+
+        ViewBag.ReturnUrl = returnUrl;
+        ViewBag.ErrorMessage = authResult.ErrorMessage;
+        return View(model);
+    }
+
+
+    [Route("auth/logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await _authService.SignOutAsync();
+        return LocalRedirect("~/");
+    }
+
+
 }

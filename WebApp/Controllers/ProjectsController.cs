@@ -1,13 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Business.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class ProjectsController : Controller
+    public class ProjectsController(IProjectService projectService) : Controller
     {
+        private readonly IProjectService _projectService = projectService;
+
+
+
+
+
+        [Route("admin/projects")]
         public IActionResult Index()
         {
-          
-            return RedirectToAction("Clients","Admin");
+            return View();
         }
+
+        [HttpDelete]
+        public IActionResult Delete()
+        {
+
+            return Ok();
+        }
+
+
+        [HttpPost]
+        public IActionResult Post()
+        {
+            return Ok();
+        }
+        [HttpPut]
+        public IActionResult Put()
+        {
+            return Ok();
+        }
+
+
     }
 }

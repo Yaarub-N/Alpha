@@ -138,12 +138,10 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
     {
         var result = await _table.AnyAsync(findBy);
 
-        if (result == false)
-
-
-            return new RepositoryResult<bool>
+        if (!result)
+           return new RepositoryResult<bool>
             {
-                Succeeded = true,// Förfrågan lyckades tekniskt/    // Anropet lyckades tekniskt
+                Succeeded = false,// Förfrågan lyckades tekniskt/    // Anropet lyckades tekniskt
                 Result = result, // true = finns, false = finns ej /  // true om entiteten finns, false annars
                 statusCode = 404, // REST: 404 om det inte finns
                 ErrorMessage = "Entity not found."
