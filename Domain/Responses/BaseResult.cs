@@ -1,4 +1,4 @@
-﻿namespace Business.Models;
+﻿namespace Domain.Responses;
 
 public abstract class BaseResult
 {

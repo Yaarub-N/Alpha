@@ -2,7 +2,7 @@
 
 using Data.Contexts;
 using Data.Entities;
-using Data.IRepositories;
+using Data.Interfaces;
 using Domain.Models;
 
 namespace Data.Repositories;

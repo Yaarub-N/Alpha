@@ -1,7 +1,7 @@
 ﻿using Data.Contexts;
-using Data.IRepositories;
-using Data.Models;
+using Data.Interfaces;
 using Domain.Extentions;
+using Domain.Responses;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq.Expressions;
@@ -36,7 +36,6 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
             return new RepositoryResult<bool> { Succeeded = false, statusCode = 500, ErrorMessage = ex.Message };
         }
     }
-
     public virtual async Task<RepositoryResult<bool>> UpdateAsync(TEntity entity)
     {
         if (entity == null)
@@ -44,7 +43,19 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
 
         try
         {
-            _table.Update(entity);
+            var entityId = GetEntityId(entity);
+
+            var tracked = _table.Local.FirstOrDefault(e => GetEntityId(e) == entityId);
+
+            if (tracked != null)
+            {
+                _context.Entry(tracked).CurrentValues.SetValues(entity);
+            }
+            else
+            {
+                _table.Update(entity);
+            }
+
             await _context.SaveChangesAsync();
             return new RepositoryResult<bool> { Succeeded = true, statusCode = 200 };
         }
@@ -54,6 +65,7 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
             return new RepositoryResult<bool> { Succeeded = false, statusCode = 500, ErrorMessage = ex.Message };
         }
     }
+
 
     public virtual async Task<RepositoryResult<bool>> RemoveAsync(TEntity entity)
     {
@@ -149,6 +161,15 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
 
         return new RepositoryResult<bool> { Succeeded = true, Result = result, statusCode = 200 };
     }
+
+
+    //chatGpt 4o  används för att läsa ID från ett befintligt objekt i minnet.andvänd for att updatera ett opject
+    public object? GetEntityId(TEntity entity)
+    {
+        var prop = typeof(TEntity).GetProperty("Id");
+        return prop?.GetValue(entity);
+    }
+
 
 
 }

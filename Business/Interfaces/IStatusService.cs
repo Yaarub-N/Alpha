@@ -1,5 +1,6 @@
 ﻿using Business.Models;
 using Domain.Models;
+using Domain.Responses;
 
 namespace Business.Interfaces
 {
@@ -7,6 +8,6 @@ namespace Business.Interfaces
     {
         Task<StatusResult> AddStatusAsync(Status status);
         Task<StatusResult> GetStatusAsync();
-        Task<StatusResult> GetStatusByIdAsync(int id);
+        Task<SingleStatusResult> GetStatusByIdAsync(int id);
     }
 }

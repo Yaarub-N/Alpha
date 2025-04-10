@@ -1,5 +1,6 @@
 ﻿using Business.Models;
 using Domain.Models;
+using Domain.Responses;
 
 namespace Business.Interfaces
 {
@@ -9,6 +10,7 @@ namespace Business.Interfaces
         Task<ProjectResult> DeleteProjectAsync(Project project);
         Task<ProjectResult<IEnumerable<Project>>> GetProjectAsync();
         Task<ProjectResult<Project>> GetProjectByIdAsync(string id);
-        Task<ProjectResult> UpdateProjectAsync(Project project);
+        Task<ProjectResult> AddMemberToProjectAsync(string projectId, string userId);
+        Task<RepositoryResult<bool>> UpdateProjectAsync(UpdateProjectForm form);
     }
 }

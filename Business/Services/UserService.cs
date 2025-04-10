@@ -3,10 +3,11 @@
 using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
-using Data.IRepositories;
+using Data.Interfaces;
 using Data.Repositories;
 using Domain.Extentions;
 using Domain.Models;
+using Domain.Responses;
 using Microsoft.AspNetCore.Identity;
 using System.Linq.Expressions;
 
@@ -35,13 +36,16 @@ public class UserService(IUserRepository userRepository, RoleManager<IdentityRol
         return projects.MapTo<UserResult<IEnumerable<User>>>();
     }
 
-    public async Task<UserResult> GetUserByIdAsync(string id)
+    public async Task<UserResult<User>> GetUserByIdAsync(string id)
     {
-        var user = await _userRepository.GetAsync(
-            where: x => x.Id == id,
-            includes: x => x.Projects
-        );
-        return user.MapTo<UserResult>();
+        var repositoryResult = await _userRepository.GetAsync(x => x.Id == id);
+
+        var entity = repositoryResult.Result;
+        if (entity == null)
+            return new UserResult<User> { Succeeded = false, StatusCode = 404, ErrorMessage = $"User with id '{id}' was not found." };
+
+        var user = entity.MapTo<User>();
+        return new UserResult<User> { Succeeded = true, StatusCode = 200, Result = user };
     }
 
 
@@ -108,6 +112,15 @@ public class UserService(IUserRepository userRepository, RoleManager<IdentityRol
             return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = ex.Message };
         }
         return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = "Failed to create user" };
+    }
+
+    public async Task<string> GetDisplayName(string userId)
+    {
+        if (string.IsNullOrEmpty(userId))
+            return "";
+
+        var user = await _userManager.FindByIdAsync(userId);
+        return user == null ? "" : $"{user.FirstName} {user.LastName}";
     }
 
 }

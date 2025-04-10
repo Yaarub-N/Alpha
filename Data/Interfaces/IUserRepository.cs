@@ -1,7 +1,7 @@
 ﻿using Data.Entities;
 using Domain.Models;
 
-namespace Data.IRepositories;
+namespace Data.Interfaces;
 
 public interface IUserRepository : IBaseRepository<UserEntity, User>
 {

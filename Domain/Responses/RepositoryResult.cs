@@ -1,6 +1,4 @@
-﻿
-
-namespace Data.Models
+﻿namespace Domain.Responses
 {
     public class RepositoryResult<TResult>
     {

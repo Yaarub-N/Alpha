@@ -1,11 +1,10 @@
-﻿using Business.Models;
-using Domain.Models;
+﻿using Domain.Models;
+using Domain.Responses;
 
-namespace Business.Interfaces
+namespace Business.Interfaces;
+
+public interface IClientService
 {
-    public interface IClientService
-    {
-        Task<ClientResult> AddClientAsync(Client client);
-        Task<ClientResult> GetClientAsync();
-    }
+    Task<ClientResult<Client >> GetClientByIdAsync(string id);
+    Task<ClientResult<IEnumerable<Client>>> GetClientsAsync();
 }

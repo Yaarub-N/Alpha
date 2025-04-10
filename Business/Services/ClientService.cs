@@ -1,29 +1,38 @@
-﻿
-
-using Business.Interfaces;
-using Data.Entities;
-using Data.IRepositories;
+﻿using Business.Interfaces;
+using Data.Interfaces;
 using Domain.Extentions;
 using Domain.Models;
+using Domain.Responses;
 
-namespace Business.Models.Services;
+namespace Business.Services;
 
 public class ClientService(IClientRepository clientRepository) : IClientService
 {
     private readonly IClientRepository _clientRepository = clientRepository;
 
-    public async Task<ClientResult> AddClientAsync(Client client)
+    public async Task<ClientResult<IEnumerable<Client>>> GetClientsAsync()
     {
-        var entity = client.MapTo<ClientEntity>();
-        var result = await _clientRepository.AddAsync(entity);
-        return result.MapTo<ClientResult>();
+        var repositoryResult = await _clientRepository.GetAllAsync
+            (
+                orderByDescending: false,
+                sortBy: x => x.ClientName
+            );
+
+        var entities = repositoryResult.Result;
+        var clients = entities?.Select(entity => entity.MapTo<Client>()) ?? [];
+
+        return new ClientResult<IEnumerable<Client>> { Succeeded = true, StatusCode = 200, Result = clients };
     }
 
-    public async Task<ClientResult> GetClientAsync()
+    public async Task<ClientResult<Client>> GetClientByIdAsync(string id)
     {
-        var result = await _clientRepository.GetAllAsync();
+        var repositoryResult = await _clientRepository.GetAsync(x => x.Id == id);
 
-        return result.MapTo<ClientResult>();
+        var entity = repositoryResult.Result;
+        if (entity == null)
+            return new ClientResult<Client> { Succeeded = false, StatusCode = 404, ErrorMessage = $"Client with id '{id}' was not found." };
 
+        var client = entity.MapTo<Client>();
+        return new ClientResult<Client> { Succeeded = true, StatusCode = 200, Result = client };
     }
 }
