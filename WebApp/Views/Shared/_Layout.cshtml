@@ -1,26 +1,39 @@
 ﻿<!DOCTYPE html>
-<html lang="en" data-theme="">
-
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> @(ViewData["Title"] == null ? "Alpha Portal" : ViewData["Title"] + " - Alpha Portal")</title>
+    <partial name="_Title" />
     <script type="importmap"></script>
+    <script src="~/js/darkmode.js" asp-append-version="true"></script>
 
- 
-    <script src="https://kit.fontawesome.com/6c755fe0c3.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <script src="~/js/wysiwyg.js" asp-append-version="true"></script>
+
+    <script src="~/js/tags.js" asp-append-version="true"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js" integrity="sha512-7SRCYIJtR6F8ocwW7UxW6wGKqbSyqREDbfCORCbGLatU0iugBLwyOXpzhkPyHIFdBO0K2VCu57fvP2Twgx1o2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/a576612222.css" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Sections/HeaderStyleSheet.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Sections/MainNavStyleSheet.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Admin/Admin.css" asp-append-version="true"/>
 </head>
 <body>
-    
 
-    <div class="portal">
-          <partial name="Partials/Sections/_Header"/>
-          <partial name="Partials/Sections/_MainNav" />
-        <main >
+    <div class="backoffice-wrapper">
+        <aside id="sidebar">
+            <button type="button" data-type="close" data-target="#sidebar" class="btn-close"></button>
+            <partial name="Partials/Components/_Logotype" />
+            <partial name="Partials/Components/_NavLinks" />
+        </aside>
+        <header>
+            <partial name="Partials/Components/_Logotype" />
+
+            <partial name="Partials/Components/_Searchbar" />
+
+            <partial name="Partials/Components/_TopMenu" />
+        </header>
+        <main>
             @RenderBody()
         </main>
     </div>

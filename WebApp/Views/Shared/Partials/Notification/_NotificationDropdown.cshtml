@@ -1,0 +1,128 @@
+﻿@{
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
+    var roleName = User.FindFirstValue(ClaimTypes.Role) ?? "";
+    var notificationResult = await notificationService.GetNotificationsAsync(userId, roleName);
+    var notifications = notificationResult.Result;
+}
+
+<div class="notification-dropdown-container">
+    <button id="notification-dropdown-button" data-type="dropdown" data-target="#notification-dropdown" class="btn-notification fa-duotone fa-solid fa-bell" style="--fa-primary-opacity: 0.4; --fa-secondary-opacity: 1;">
+        @if (notifications.Any())
+        {
+            <div class="dot dot-red"></div>
+        }
+    </button>
+
+    <div id="notification-dropdown" class="notification-dropdown">
+        <div class="notification-header">
+            <h4>Notifications</h4>
+            <span class="notification-number">@notifications.Count()</span>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="notifications">
+
+            @foreach (var notification in notifications)
+            {
+                <div class="notification-item" data-id="@notification.Id">
+                    <img class="image" src="@notification.Image" />
+                    <div class="message">@notification.Message</div>
+                    <div class="time" data-created="@notification.CreateDate.ToString("s")">@notification.CreateDate</div>
+                    <button class="btn-close" onclick="dismissNotification('@notification.Id')"></button>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function removeNotification(notificationId) {
+        const element = document.querySelector(`.notification-item[data-id="${notificationId}"]`)
+        if (element) {
+            element.remove()
+            updateNotificationCount()
+        }
+    }
+
+    async function dismissNotification(notificationId) {
+
+        try {
+
+            const res = await fetch(`/api/notifications/dismiss/${notificationId}`, { method: 'POST' })
+            if (res.ok) {
+                removeNotification(notificationId)
+            }
+            else {
+                console.error('Error removing notification')
+            }
+        }
+        catch (error) {
+            console.error('Error removing notification: ', error)
+        }
+    }
+
+
+    function updateNotificationCount() {
+        const notifications = document.querySelector('.notifications');
+        const notificationNumber = document.querySelector('.notification-number');
+        const notificationDropdownButton = document.getElementById('notification-dropdown-button');
+
+        console.log("Notification button:", notificationDropdownButton);
+        if (!notifications) {
+            console.error("Notifications element not found");
+            return;
+        }
+
+        const count = notifications.querySelectorAll('.notification-item').length;
+        console.log("Notification count:", count);
+
+        if (notificationNumber) {
+            notificationNumber.textContent = count;
+        }
+
+        let dot = notificationDropdownButton.querySelector('.dot.dot-red');
+        console.log("Current dot:", dot);
+
+        if (count > 0 && !dot) {
+            console.log("Creating new dot");
+            dot = document.createElement('div');
+            dot.className = 'dot dot-red';
+            if (notificationDropdownButton) {
+                notificationDropdownButton.appendChild(dot);
+                console.log("Dot added successfully");
+            } else {
+                console.error("Button not found for dot");
+            }
+        }
+        if (count === 0 && dot) {
+            dot.remove();
+            console.log("Dot removed");
+        }
+    }
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/notificationHub")
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+    connection.on("ReceiveNotification", (notification) => {
+    });
+
+    connection.onclose(error => {
+
+        setTimeout(() => startConnection(), 5000);
+    });
+
+    function startConnection() {
+        connection.start()
+            .then(() => console.log("✅ SignalR connected successfully"))
+            .catch(err => {
+
+                setTimeout(startConnection, 5000);
+            });
+    }
+
+    startConnection();
+
+</script>

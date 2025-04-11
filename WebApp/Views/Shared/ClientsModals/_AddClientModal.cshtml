@@ -1,0 +1,77 @@
+﻿@model AddClientForm
+
+<section id="add-client-modal" class="modal">
+    <div class="card">
+        <div class="card-header">
+            <h3>Add Client</h3>
+            <button type="button" class="btn-close" data-type="close" data-target="#add-client-modal"></button>
+        </div>
+        <div class="card-body">
+            <form id="add-client-form" method="post" enctype="multipart/form-data" asp-controller="Clients" asp-action="Add" novalidate>
+
+                <!-- Client Name -->
+                <div class="form-group">
+                    <label asp-for="ClientName" class="form-label"></label>
+                    <input asp-for="ClientName" class="form-input" />
+                    <span asp-validation-for="ClientName" class="field-validation-error"></span>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-input" />
+                    <span asp-validation-for="Email" class="field-validation-error"></span>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                    <label asp-for="Phone" class="form-label"></label>
+                    <input asp-for="Phone" class="form-input" />
+                    <span asp-validation-for="Phone" class="field-validation-error"></span>
+                </div>
+
+                <!-- Location -->
+                <div class="form-group">
+                    <label asp-for="Location" class="form-label"></label>
+                    <input asp-for="Location" class="form-input" />
+                    <span asp-validation-for="Location" class="field-validation-error"></span>
+                </div>
+
+                <button type="submit" class="btn btn-blue btn-submit">Create</button>
+            </form>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const clientForm = document.querySelector("#add-client-form");
+
+        if (clientForm) {
+            clientForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(clientForm);
+                const res = await fetch("/Clients/Add", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (!res.ok) {
+                    const result = await res.json();
+                    if (result.errors) {
+                        showValidationErrors(result.errors);
+                    } else if (result.error) {
+                        alert(result.error); // 🔁 fallback för andra fel
+                    }
+                    return;
+                }
+
+                // Om allt gick bra
+                clientForm.reset();
+                document.querySelector("#add-client-modal")?.classList.remove("show");
+            });
+        }
+    });
+
+
+</script>

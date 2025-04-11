@@ -20,21 +20,22 @@ public class UserService(IUserRepository userRepository, RoleManager<IdentityRol
     private readonly UserManager<UserEntity> _userManager = userManager;
 
 
-
     public async Task<UserResult<IEnumerable<User>>> GetAllUsersAsync()
     {
-        var projects = await _userRepository.GetAllAsync(
-       orderByDescending: true,
-       where: null,
+        var repositoryResult = await _userRepository.GetAllAsync
+            (
+                orderByDescending: false,
+                sortBy: x => x.UserName!
+            );
 
-       //Params förväntar sig en lista av lambda-uttryck – inte flera includes => som du skriver.
-       includes:
-       [
-        x => x.Projects,
-       ]
-   );
-        return projects.MapTo<UserResult<IEnumerable<User>>>();
+        var entities = repositoryResult.Result;
+        var users = entities?.Select(entity => entity.MapTo<User>()) ?? [];
+
+        return new UserResult<IEnumerable<User>> { Succeeded = true, StatusCode = 200, Result = users };
     }
+
+
+
 
     public async Task<UserResult<User>> GetUserByIdAsync(string id)
     {

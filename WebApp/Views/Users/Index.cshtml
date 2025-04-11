@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Domain.Models.User>
+
+@{
+    ViewData["Title"] = "Members";
+}
+
+<section id="members">
+    <div class="section-header">
+        <h1>@ViewData["Title"]</h1>
+        <button type="button" class="btn btn-add" data-type="modal" data-target="#add-user-modal">
+            <span>Add Member</span>
+        </button>
+    </div>
+</section>
+
+<section id="members-list">
+ 
+   
+        @Html.Partial("~/Views/Shared/ListItems/_UserListIemPartial.cshtml", Model)
+  
+</section>
+
+@Html.Partial("~/Views/Shared/UserModal/_AddUserModal.cshtml", new WebApp.Models.UserViewModel())
