@@ -1,5 +1,6 @@
 ﻿using Data.Contexts;
 using Data.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +26,11 @@ public static class AuthenticationServiceExtensions
             x.ExpireTimeSpan = TimeSpan.FromMinutes(30);
             x.SlidingExpiration = true;
             x.Cookie.HttpOnly = true;
+            x.Cookie.SameSite = SameSiteMode.Lax;
+            x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         });
+
+        
 
         return services;
     }

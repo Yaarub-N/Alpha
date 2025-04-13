@@ -1,4 +1,4 @@
-﻿@model SignInFromModel
+﻿@model LoginViewModel
 
 @{
     Layout = "_AuthLayout";
@@ -7,11 +7,10 @@
 
 <div class="form-container">
     <h1>Login</h1>
-
-    <div class="googlebox">
-        <img src="~/images/google-icon.svg" alt="google icon" />
-        <a href="#">Login with Google</a>
-    </div>
+    <form asp-controller="Auth" asp-action="ExternalSignIn" method="post">
+        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+        <button class="googlebox" type="submit" name="provider" value="Google">  <img src="~/images/google-icon.svg" alt="google icon" />  Login with Google</button>
+    </form>
 
     <span class="or">OR</span>
 
@@ -44,6 +43,6 @@
     </form>
 
     <div class="login-link">
-        Don't have an account? <a asp-action="Register" >Sign Up</a>
+        Don't have an account? <a asp-action="SignUp">Sign Up</a>
     </div>
 </div>

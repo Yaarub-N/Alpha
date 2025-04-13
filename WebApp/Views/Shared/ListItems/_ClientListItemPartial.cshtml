@@ -1,0 +1,35 @@
+﻿@model Client
+@{
+    Layout = null;
+}
+
+<div class="card client-card" data-client-id="@Model.Id">
+    <div class="card-header">
+        <h4 class="client-name">@Model.ClientName</h4>
+        <div class="client-actions">
+            <button type="button" data-type="modal" data-target="#edit-client-modal" class="btn-action">
+                <i class="fa-duotone fa-pen-to-square"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <p>
+            <i class="fa-duotone fa-envelope"></i>
+            <span>@Model.Email</span>
+        </p>
+        @if (!string.IsNullOrWhiteSpace(Model.Phone))
+        {
+            <p>
+                <i class="fa-duotone fa-phone"></i>
+                <span>@Model.Phone</span>
+            </p>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Location))
+        {
+            <p>
+                <i class="fa-duotone fa-location-dot"></i>
+                <span>@Model.Location</span>
+            </p>
+        }
+    </div>
+</div>

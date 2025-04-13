@@ -1,0 +1,41 @@
+﻿@model AddClientForm
+
+<section id="add-client-modal" class="modal">
+    <div class="card">
+        <div class="card-header">
+            <h3>Add Client</h3>
+            <button type="button" class="btn-close" data-type="close" data-target="#add-client-modal"></button>
+        </div>
+        <div class="card-body">
+            <form  id="add-client-form" method="post" enctype="multipart/form-data" asp-controller="Clients" asp-action="Add" novalidate>
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label asp-for="ClientName"></label>
+                    <input asp-for="ClientName" class="form-input" />
+                    <span asp-validation-for="ClientName" class="field-validation-error" data-valmsg-for="ClientName"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-input" />
+                    <span asp-validation-for="Email" class="field-validation-error" data-valmsg-for="Email"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Phone" class="form-label"></label>
+                    <input asp-for="Phone" class="form-input" />
+                    <span asp-validation-for="Phone" class="field-validation-error" data-valmsg-for="Phone"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Location" class="form-label"></label>
+                    <input asp-for="Location" class="form-input" />
+                    <span asp-validation-for="Location" class="field-validation-error "data-valmsg-for="Location"></span>
+                </div>
+
+                <button type="submit" class="btn btn-blue btn-submit">Create</button>
+            </form>
+        </div>
+    </div>
+</section>

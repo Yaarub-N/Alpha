@@ -1,4 +1,5 @@
 ﻿using Business.Interfaces;
+using Data.Entities;
 using Data.Interfaces;
 using Domain.Extentions;
 using Domain.Models;
@@ -9,6 +10,24 @@ namespace Business.Services;
 public class ClientService(IClientRepository clientRepository) : IClientService
 {
     private readonly IClientRepository _clientRepository = clientRepository;
+
+    public async Task<ClientResult<bool>> AddClientAsync(Client client)
+    {
+        client.Id = Guid.NewGuid().ToString();
+        var entity = client.MapTo<ClientEntity>();
+        var result = await _clientRepository.AddAsync(entity);
+
+        return new ClientResult<bool>
+        {
+          
+            Succeeded = result.Succeeded,
+            StatusCode = result.statusCode,
+            Result = result.Result,
+            ErrorMessage = result.ErrorMessage
+        };
+    }
+
+
 
     public async Task<ClientResult<IEnumerable<Client>>> GetClientsAsync()
     {

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Client>
+
+@{
+    ViewData["Title"] = "Clients";
+}
+
+<section id="clients">
+    <div class="section-header">
+        <h1>@ViewData["Title"]</h1>
+        <button type="button" class="btn btn-add" data-type="modal" data-target="#add-client-modal">
+            <span>Add Client</span>
+        </button>
+    </div>
+</section>
+
+
+
+
+<section id="clients-list">
+
+
+@foreach (var client in Model)
+{
+    @Html.Partial("~/Views/Shared/ListItems/_ClientListItemPartial.cshtml", client)
+}
+</section>
+@Html.Partial("~/Views/Shared/ClientsModals/_AddClientModal.cshtml", new AddClientForm())
+
+@await Html.PartialAsync("~/Views/Shared/Validation/_ValidationScript.cshtml")
+

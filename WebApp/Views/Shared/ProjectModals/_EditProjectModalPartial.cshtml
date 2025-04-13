@@ -1,0 +1,199 @@
+﻿@model EditProjectViewModel
+
+<section id="edit-project-modal" class="modal">
+    <div class="card">
+        <div class="card-header">
+            <h3>Edit Project</h3>
+            <button type="button" class="btn-close" data-type="close" data-target="#edit-project-modal"></button>
+        </div>
+        <div class="card-body">
+
+                <form id="editProjectForm" asp-controller="Projects" asp-action="Update" method="post" enctype="multipart/form-data" asp-antiforgery="true" novalidate>
+                    @Html.AntiForgeryToken()
+               
+
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="ImageUrl" value="@Model.ImageUrl" />
+
+                <div class="form-group">
+                    <label class="form-label">Image</label>
+                    <div class="image-preview-container project-image" data-file-upload>
+                        <img id="editImagePreview" class="@(string.IsNullOrEmpty(Model.ImageUrl) ? "hide" : "")" src="@Model.ImageUrl" />
+                        <div class="circle circle-gray">
+                            <i class="fa-duotone fa-camera"></i>
+                        </div>
+                        <input type="file" accept="image/*" name="ImageFile" id="editImageFileInput" class="ImgInput" />
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-label">Project Name</label>
+                    <input class="form-input" type="text" name="ProjectName" value="@Model.ProjectName" placeholder="Enter project name" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Client</label>
+                    <select class="form-input" name="ClientId">
+                        <option disabled>Choose client</option>
+                        @foreach (var client in Model.Clients)
+                        {
+                            if (client.Value == Model.ClientId)
+                            {
+                                <option value="@client.Value" selected>@client.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@client.Value">@client.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea name="Description" id="edit-project-description">@Model.Description</textarea>
+                </div>
+
+                <div class="form-horizontal-group">
+                    <div class="form-group">
+                        <label class="form-label">Start Date</label>
+                        <input class="form-input" type="date" name="StartDate" value="@Model.StartDate?.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">End Date</label>
+                        <input class="form-input" type="date" name="EndDate" value="@Model.EndDate?.ToString("yyyy-MM-dd")" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Member</label>
+                    <select class="form-input" name="UserId">
+                        <option disabled>Choose member</option>
+                        @foreach (var member in Model.Members)
+                        {
+                            if (member.Value == Model.UserId)
+                            {
+                                <option value="@member.Value" selected>@member.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@member.Value">@member.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Budget</label>
+                    <input class="form-input" type="number" name="Budget" value="@Model.Budget" step="0.01" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select class="form-input" name="StatusId">
+                        <option disabled>Choose status</option>
+                        @foreach (var status in Model.Statuses)
+                        {
+                            if (status.Value == Model.StatusId.ToString())
+                            {
+                                <option value="@status.Value" selected>@status.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@status.Value">@status.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
+    </div>
+</section>
+<script>
+
+    //chat Gpt 4o
+    document.addEventListener('DOMContentLoaded', function () {
+        const editProjectForm = document.getElementById('editProjectForm');
+
+        if (editProjectForm) {
+            editProjectForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Stäng modal
+                        document.querySelector('#edit-project-modal')?.classList.remove('show');
+
+                        // Uppdatera sidan
+                        window.location.reload();
+                    } else {
+                        // Visa valideringsfel
+                        showValidationErrors(data.errors);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        }
+
+        // Fyll i modal med projektdata
+        document.querySelectorAll(".dropdown-action[data-target='#edit-project-modal']").forEach(button => {
+            button.addEventListener("click", async () => {
+                const projectCard = button.closest(".project");
+                const projectId = projectCard.getAttribute("data-project-id");
+
+                const response = await fetch(`/Projects/GetProject?id=${projectId}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const project = result.project;
+
+                       const idField = document.querySelector("#edit-project-modal [name='Id']");
+    if (idField) {
+        idField.value = project.id;
+        console.log("ID field set to:", idField.value);
+    }
+                    document.querySelector("#edit-project-modal [name='ProjectName']").value = project.projectName;
+                    document.querySelector("#edit-project-modal [name='Description']").value = project.description || "";
+                    document.querySelector("#edit-project-modal [name='StartDate']").value = project.startDate?.split('T')[0] || "";
+                    document.querySelector("#edit-project-modal [name='EndDate']").value = project.endDate?.split('T')[0] || "";
+                    document.querySelector("#edit-project-modal [name='Budget']").value = project.budget || "";
+                    document.querySelector("#edit-project-modal [name='ClientId']").value = project.client.Id;
+                    document.querySelector("#edit-project-modal [name='UserId']").value = project.User.Id;
+                    document.querySelector("#edit-project-modal [name='StatusId']").value = project.Status.Id;
+                    document.querySelector("#edit-project-modal [name='ImageUrl']").value = project.imageUrl || "";
+
+                    const imagePreview = document.getElementById("editImagePreview");
+                    if (project.imageUrl) {
+                        imagePreview.src = project.imageUrl;
+                        imagePreview.classList.remove("hide");
+                    } else {
+                        imagePreview.classList.add("hide");
+                    }
+                }
+            });
+        });
+
+        // Förhandsgranska ny bild
+        document.getElementById("editImageFileInput")?.addEventListener("change", function (e) {
+            const [file] = e.target.files;
+            const preview = document.getElementById("editImagePreview");
+
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.classList.remove("hide");
+            }
+        });
+    });
+</script>

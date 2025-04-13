@@ -5,7 +5,7 @@ public class UserResult : BaseResult
 
 }
 
-public class UserResult<T> : UserResult
+public class UserResult<User> : UserResult
 {
-    public T? Result { get; set; }
+    public User? Result { get; set; }
 }

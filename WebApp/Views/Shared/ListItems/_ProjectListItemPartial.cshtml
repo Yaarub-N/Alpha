@@ -1,0 +1,85 @@
+﻿
+
+@model Project
+
+<div class="project card" data-project-id="@Model.Id">
+    <div class="card-header">
+        <div class="project-image">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl) || !string.IsNullOrEmpty(Model.ImageFileName))
+            {    
+                 <img src="@Model.ImageUrl" alt="@Model.ProjectName" /> 
+                 <img src="/images/projects/@Model" alt="template project" /> 
+            }
+            else
+            {
+                <img src="~/images/projects/avatar.svg" alt="template project" />
+            }
+        </div>
+        <h6 class="project-name">@Model.ProjectName</h6>
+        <span class="client-name">@Model.Client?.ClientName</span>
+        <div id="project-actions-container">
+            <button type="button" data-type="dropdown" data-target="#project-dropdown-@Model.Id" class="btn-action">
+                <i class="fa-solid fa-ellipsis"></i>
+            </button>
+            <div id="project-dropdown-@Model.Id" class="dropdown">
+                <div class="dropdown-body">
+                    <nav class="dropdown-actions">
+                        <button data-type="modal" data-target="#edit-project-modal" class="dropdown-action">
+                            <i class="fa-duotone fa-solid fa-pen-to-square"></i>
+                            <span>Edit</span>
+                        </button>
+                        <button class="dropdown-action" data-type="modal" data-target="#add-member-modal">
+                            <i class="fa-duotone fa-user-plus"></i>
+                            <span>Add Member</span>
+                        </button>
+
+                    </nav>
+                    <div class="divider"></div>
+                    <nav class="dropdown-actions">
+                        <a class="dropdown-action remove">
+
+                            <form asp-controller="Projects" asp-action="Delete" method="post" class="delete-form">
+                                <input type="hidden" name="id" value="@Model.Id" />
+                                <button type="submit" class="dropdown-action btn btn-danger">
+                                    <i class="fa-duotone fa-trash"></i>
+                                    <span>Delete Project</span>
+                                </button>
+                            </form>
+                            
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <p>@Html.Raw(Model.Description)</p>
+    </div>
+    <div class="card-footer">
+        <div class="badge badge-normal">
+            <i class="fa-duotone fa-solid fa-clock"></i>
+            <span>5 days left</span>
+        </div>
+        <div class="members">
+
+            @if (Model.User != null && !string.IsNullOrEmpty(Model.User.ImageUrl))
+            {
+               
+                @foreach (var option in Model.User.ImageUrl)
+                {
+                    <div class="user-image">
+                    <img src="@Model.User.ImageUrl" alt="@Model.ProjectName" />
+					</div>
+                }
+            }
+            else
+            {
+                <div class="user-image">
+                <img src="~/images/profiles/user-template.svg" alt="template project" />
+                </div>
+            }
+
+         
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Domain.Models.User>
+
+@{
+    ViewData["Title"] = "Members";
+}
+
+
+    <div class="user-list">
+        @foreach (var user in Model)
+        {
+            <div class="user-card">
+            
+                @if (!string.IsNullOrEmpty(user.ImageUrl))
+                {
+                    <img src="@user.ImageUrl" alt="Profile image of @user.FirstName" />
+                }
+                else
+                {
+                    <img src="~/images/profiles/user-template.svg" alt="Default profile image" />
+                }
+            <h5>@user.FirstName @user.LastName</h5>
+            <p>@user.Email</p>
+            <p>@user.Role</p>
+            <p>@user.PhoneNumber</p>
+            <button class="button">Message</button>
+            </div>
+        }
+    </div>

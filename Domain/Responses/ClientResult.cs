@@ -6,9 +6,9 @@ namespace Domain.Responses;
 
 
 
-public class ClientResult<T> : BaseResult
+public class ClientResult<Client> : BaseResult
 {
-    public T? Result { get; set; }  
+    public Client? Result { get; set; }  
 }
 
 public class ClientResult : BaseResult
