@@ -53,7 +53,8 @@ public class UserService(IUserRepository userRepository, RoleManager<IdentityRol
     public async Task<UserResult> AddUserToRoleAsync(string userId, string roleName)
     {
 
-        var exist = await _roleManager.RoleExistsAsync(roleName);
+
+        var exist = await _roleManager.RoleExistsAsync(roleName.ToUpper());
         if (!exist)
         {
             return new UserResult { Succeeded = false, StatusCode = 404, ErrorMessage = "Role does't exists" };
@@ -65,7 +66,8 @@ public class UserService(IUserRepository userRepository, RoleManager<IdentityRol
             return new UserResult { Succeeded = false, StatusCode = 404, ErrorMessage = "User does't exists" };
         }
 
-        var result = await _userManager.AddToRoleAsync(user, roleName);
+        var result = await _userManager.AddToRoleAsync(user, roleName.ToUpper());
+
         if (!result.Succeeded)
         {
             return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = "Failed to add user to role" };
@@ -76,44 +78,48 @@ public class UserService(IUserRepository userRepository, RoleManager<IdentityRol
     }
 
 
+public async Task<UserResult> CreatUserAsync(SignUpFormData form, string roleName = "User")
+{
+    if (form == null)
+        return new UserResult { Succeeded = false, StatusCode = 400, ErrorMessage = "Form data can't be null." };
 
-    public async Task<UserResult> CreatUserAsync(SignUpFormData form, string roleName = "User")
+    var exists = await _userRepository.ExistAsync(x => x.Email == form.Email);
+    if (exists.Succeeded)
+        return new UserResult { Succeeded = false, StatusCode = 409, ErrorMessage = "User already exists." };
+
+    try
     {
-        if (form == null)
+        var userEntity = form.MapTo<UserEntity>();
+        userEntity.UserName = userEntity.Email;
+
+        var createResult = await _userManager.CreateAsync(userEntity, form.Password);
+
+        if (!createResult.Succeeded)
         {
-            return new UserResult { Succeeded = false, StatusCode = 400, ErrorMessage = "Form data can't be null." };
+            var errors = string.Join(", ", createResult.Errors.Select(e => e.Description));
+            return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = errors };
         }
-        var exists = await _userRepository.ExistAsync(x => x.Email == form.Email);
-        if (exists.Succeeded)
+
+        var roleExists = await _roleManager.RoleExistsAsync(roleName);
+        if (!roleExists)
         {
-            return new UserResult { Succeeded = false, StatusCode = 409, ErrorMessage = "User already exists." };
+            return new UserResult { Succeeded = false, StatusCode = 404, ErrorMessage = $"Role '{roleName}' does not exist." };
         }
 
-        try
+        var roleResult = await _userManager.AddToRoleAsync(userEntity, roleName);
+        if (!roleResult.Succeeded)
         {
-
-            var userEntity = form.MapTo<UserEntity>();
-            userEntity.UserName = userEntity.Email;
-            var result = await _userManager.CreateAsync(userEntity, form.Password);
-            if (result.Succeeded)
-            {
-
-                var roleResult = await AddUserToRoleAsync(userEntity.Id, roleName);
-                if (!roleResult.Succeeded)
-                {
-                    return new UserResult { Succeeded = false, StatusCode = 201, ErrorMessage = "Failed to add user to role" };
-                }
-
-                return new UserResult { Succeeded = true, StatusCode = 201 };
-            }
+            return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = $"User created but failed to add role" };
         }
-        catch (Exception ex)
-        {
 
-            return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = ex.Message };
-        }
-        return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = "Failed to create user" };
+        return new UserResult { Succeeded = true, StatusCode = 201 };
     }
+    catch (Exception ex)
+    {
+        return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = ex.Message };
+    }
+}
+
 
     public async Task<string> GetDisplayName(string userId)
     {

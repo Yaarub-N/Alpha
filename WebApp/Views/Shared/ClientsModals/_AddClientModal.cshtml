@@ -7,7 +7,7 @@
             <button type="button" class="btn-close" data-type="close" data-target="#add-client-modal"></button>
         </div>
         <div class="card-body">
-            <form  id="add-client-form" method="post" enctype="multipart/form-data" asp-controller="Clients" asp-action="Add" novalidate>
+            <form id="add-client-form" method="post" enctype="multipart/form-data" asp-controller="Clients" asp-action="Add" data-ajax="true" novalidate>
                 @Html.AntiForgeryToken()
 
                 <div class="form-group">

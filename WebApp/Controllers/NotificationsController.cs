@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Security.Claims;
 
-namespace Presentation.Controllers;
+namespace WebApp.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Hubs;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
@@ -14,6 +15,7 @@ builder.Services.AddContexts(builder.Configuration.GetConnectionString("SqlConne
 builder.Services.AddLocalIdentity(builder.Configuration);
 builder.Services.AddRepositories(builder.Configuration);
 builder.Services.AddServices(builder.Configuration);
+
 
 
 

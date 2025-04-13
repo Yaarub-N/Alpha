@@ -16,7 +16,9 @@
 
     <span class="or">OR</span>
 
-    <form method="post" asp-controller="Auth" asp-action="SignUp" novalidate>
+    <form id="signup-form" method="post" asp-controller="Auth" asp-action="SignUp" data-ajax="true" novalidate>
+
+
         <div class="form-group">
             <label asp-for="FirstName"></label>
     <div class="form-box">
@@ -48,8 +50,8 @@
         <div class="form-group">
             <label asp-for="ConfirmPassword"></label>
             <div class="form-box">
-            <input type="password" asp-for="ConfirmPassword" >
-                <span class="validationSpan" asp-validation-for="ConfirmPassword"></span>
+                <input type="password" asp-for="ConfirmPassword" data-val="true">
+                <span class="validationSpan" asp-validation-for="ConfirmPassword" ></span>
             </div>
         </div>
         <div class="checkbox-group">
@@ -60,3 +62,72 @@
     </form>
     <div class="login-link">
         Already have an account? <a asp-action="Login">Login</a>
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="form-error">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+        @section Scripts {
+            <script src="~/js/validate.js" asp-append-version="true"></script>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const form = document.querySelector("#signup-form");
+                    if (!form) return;
+
+                    form.addEventListener("submit", async (e) => {
+                        e.preventDefault();
+
+                        // ✅ Kör validering på alla inputs
+                        let hasErrors = false;
+                        const fields = form.querySelectorAll("input[data-val='true']");
+                        fields.forEach(field => {
+                            validateField(field);
+                            if (field.classList.contains("input-validation-error")) {
+                                hasErrors = true;
+                            }
+                        });
+
+                        if (hasErrors) return; // 🛑 Stoppa submit om validering failar
+
+                        // Rensa gamla fel om det är lyckad
+                        form.querySelectorAll("span[data-valmsg-for]").forEach(span => {
+                            span.textContent = "";
+                            span.style.display = "none";
+                        });
+
+                        const res = await fetch(form.action, {
+                            method: "POST",
+                            body: new FormData(form)
+                        });
+
+                        const contentType = res.headers.get("content-type");
+
+                        if (res.ok && contentType?.includes("application/json")) {
+                            const result = await res.json();
+                            if (result.redirectUrl) {
+                                window.location.href = result.redirectUrl;
+                            }
+                        } else if (!res.ok && contentType?.includes("application/json")) {
+                            const result = await res.json();
+                            if (result.errors) {
+                                for (const field in result.errors) {
+                                    const input = form.querySelector(`[name="${field}"]`);
+                                    const span = form.querySelector(`span[data-valmsg-for="${field}"]`);
+                                    if (span) {
+                                        span.textContent = result.errors[field].join(", ");
+                                        span.classList.add("field-validation-error");
+                                        span.classList.remove("field-validation-valid");
+                                        span.style.display = "block";
+                                    }
+                                    input?.classList.add("input-validation-error");
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+
+        }

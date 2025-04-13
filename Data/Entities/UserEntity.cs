@@ -13,5 +13,4 @@ public class UserEntity : IdentityUser
     public string? Jobtitle { get; set; }
     public string? ImageUrl { get; set; }
     public virtual ICollection<ProjectEntity> Projects { get; set; } = [];
-    public string? Role { get; set; } 
 }

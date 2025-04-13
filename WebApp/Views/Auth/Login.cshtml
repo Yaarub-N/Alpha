@@ -7,33 +7,38 @@
 
 <div class="form-container">
     <h1>Login</h1>
+
     <form asp-controller="Auth" asp-action="ExternalSignIn" method="post">
         <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
-        <button class="googlebox" type="submit" name="provider" value="Google">  <img src="~/images/google-icon.svg" alt="google icon" />  Login with Google</button>
+        <button class="googlebox" type="submit" name="provider" value="Google">
+            <img src="~/images/google-icon.svg" alt="google icon" /> Login with Google
+        </button>
     </form>
 
     <span class="or">OR</span>
 
-    <form novalidate asp-controller="Auth" asp-action="Login">
+    <form id="login-form" method="post" asp-controller="Auth" asp-action="Login" data-ajax="true" novalidate>
+        <div id="form-error-message" class="form-error"></div>
+
         <div class="form-group">
             <label asp-for="Email" for="email">Email</label>
             <div class="form-box">
-            <input asp-for="Email" type="email" id="email" placeholder="Your email address" autocomplete="email" autofocus>
-            <span asp-validation-for="Email" class="validationSpan"></span>
+                <input asp-for="Email" type="email" id="email" placeholder="Your email address" autocomplete="email" autofocus data-val="true">
+                <span asp-validation-for="Email" class="validationSpan"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label asp-for="Password" for="password">Password</label>
             <div class="form-box">
-            <input asp-for="Password" type="password" id="password" placeholder="Enter your password">
-            <span class="validationSpan" asp-validation-for="Password"></span>
+                <input asp-for="Password" type="password" id="password" placeholder="Enter your password" data-val="true">
+                <span asp-validation-for="Password" class="validationSpan"></span>
             </div>
         </div>
 
         <div class="options">
             <div class="checkbox-group">
-                <input type="checkbox" id="remember-me">
+                <input type="checkbox" id="remember-me" name="IsPersistent" />
                 <label for="remember-me">Remember Me</label>
             </div>
             <a href="#" class="forgot-password">Forgot Password?</a>
@@ -45,4 +50,70 @@
     <div class="login-link">
         Don't have an account? <a asp-action="SignUp">Sign Up</a>
     </div>
+  
+
 </div>
+
+@section Scripts {
+    <script src="~/js/validate.js" asp-append-version="true"></script>
+
+    <script>
+               document.addEventListener("DOMContentLoaded", () => {
+            const form = document.querySelector("#login-form");
+            const errorDiv = document.querySelector("#form-error-message");
+
+            if (!form) return;
+
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+           //Chat gpt 4o
+                errorDiv.style.display = "none";
+                errorDiv.textContent = "";
+
+                const fields = form.querySelectorAll("input[data-val='true']");
+                let hasErrors = false;
+                fields.forEach(field => {
+                    validateField(field);
+                    if (field.classList.contains("input-validation-error")) {
+                        hasErrors = true;
+                    }
+                });
+
+                if (hasErrors) return;
+
+                const res = await fetch(form.action, {
+                    method: "POST",
+                    body: new FormData(form)
+                });
+
+                const contentType = res.headers.get("content-type");
+
+                if (res.ok && contentType?.includes("application/json")) {
+                    const result = await res.json();
+                    if (result.redirectUrl) {
+                        window.location.href = result.redirectUrl;
+                    }
+                } else if (!res.ok && contentType?.includes("application/json")) {
+                    const result = await res.json();
+                    if (result.errors?.Auth) {
+                        errorDiv.textContent = result.errors.Auth.join(", ");
+                        errorDiv.style.display = "block";
+                    } else {
+                  
+                        for (const field in result.errors) {
+                            const input = form.querySelector(`[name="${field}"]`);
+                            const span = form.querySelector(`span[data-valmsg-for="${field}"]`);
+                            if (span) {
+                                span.textContent = result.errors[field].join(", ");
+                                span.style.display = "block";
+                                input?.classList.add("input-validation-error");
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+}

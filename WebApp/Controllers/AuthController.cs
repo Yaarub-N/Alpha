@@ -32,15 +32,20 @@ namespace WebApp.Controllers
             ViewBag.ErrorMessage = "";
             return View();
         }
-
         [HttpPost("auth/signup")]
-        public async Task<IActionResult> SignUp(SignUpViewModel model, string returnUrl = "~/")
+        public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.ReturnUrl = returnUrl;
-                ViewBag.ErrorMessage = "";
-                return View(model);
+                return BadRequest(new
+                {
+                    errors = ModelState
+                        .Where(x => x.Value?.Errors.Count > 0)
+                        .ToDictionary(
+                            kvp => kvp.Key,
+                            kvp => kvp.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
+                        )
+                });
             }
 
             var signUpFormData = model.MapTo<SignUpFormData>();
@@ -48,13 +53,24 @@ namespace WebApp.Controllers
 
             if (authResult.Succeeded)
             {
-                return LocalRedirect(returnUrl);
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                }
+
+                return Json(new { redirectUrl = Url.Content("~/admin/overview") });
             }
 
-            ViewBag.ReturnUrl = returnUrl;
-            ViewBag.ErrorMessage = authResult.ErrorMessage;
-            return View(model);
+            return BadRequest(new
+            {
+                errors = new Dictionary<string, string[]>
+        {
+            { "Email", new[] { authResult.ErrorMessage ?? "Something went wrong." } }
         }
+            });
+        }
+
 
         [HttpGet("auth/login")]
         public IActionResult Login(string returnUrl = "~/")
@@ -67,34 +83,36 @@ namespace WebApp.Controllers
         [HttpPost("auth/login")]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = "~/")
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var signInFormData = model.MapTo<SignInFormData>();
-                var authResult = await _authService.SignInAsync(signInFormData);
-
-                if (authResult.Succeeded)
+                return BadRequest(new
                 {
-                    var user = await _userManager.FindByEmailAsync(model.Email);
-                    if (user != null)
-                    {
-                        var notification = new NotificationFormData
-                        {
-                            NotificationTypeId = 1,
-                            NotificationTargetId = 1,
-                            Message = $"{user.FirstName} {user.LastName} signed in.",
-                          
-                        };
-                        await _notificationService.AddNotificationAsync(notification);
-                    }
-
-                    return LocalRedirect(returnUrl);
-                }
+                    errors = ModelState
+                        .Where(x => x.Value?.Errors.Count > 0)
+                        .ToDictionary(
+                            kvp => kvp.Key,
+                            kvp => kvp.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
+                        )
+                });
             }
 
-            ViewBag.ReturnUrl = returnUrl;
-            ViewBag.ErrorMessage = "Unable to login. Try another email or password.";
-            return View(model);
+            var signInFormData = model.MapTo<SignInFormData>();
+            var authResult = await _authService.SignInAsync(signInFormData);
+
+            if (authResult.Succeeded)
+            {
+                return Json(new { redirectUrl = Url.Content("~/admin/overview") });
+            }
+
+            return BadRequest(new
+            {
+                errors = new Dictionary<string, string[]>
+        {
+            { "Auth", new[] { "Email or password is incorrect." } }
         }
+            });
+        }
+
 
         [HttpPost("auth/externalsignin")]
         public IActionResult ExternalSignIn(string provider, string? returnUrl = null)
@@ -169,7 +187,7 @@ namespace WebApp.Controllers
                     FirstName = firstName,
                     LastName = lastName
                 };
-
+                //chat Gpt 4o
                 var identityResult = await _userManager.CreateAsync(user);
                 if (identityResult.Succeeded)
                 {
