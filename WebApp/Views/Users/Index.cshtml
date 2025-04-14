@@ -16,8 +16,9 @@
 <section id="members-list">
  
    
-        @Html.Partial("~/Views/Shared/ListItems/_UserListIemPartial.cshtml", Model)
+    @await Html.PartialAsync("~/Views/Shared/ListItems/_UserListIemPartial.cshtml", Model)
   
 </section>
 
-@Html.Partial("~/Views/Shared/UserModal/_AddUserModal.cshtml", new WebApp.Models.UserViewModel())
+
+@await Html.PartialAsync("~/Views/Shared/UserModal/_AddUserModal.cshtml", new WebApp.Models.UserViewModel())

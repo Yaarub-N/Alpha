@@ -16,6 +16,7 @@ public class ProjectsController(IProjectService projectService, IClientService c
     private readonly IClientService _clientService = clientService;
     private readonly IStatusService _statusService = statusService;
     private readonly IUserService _userService = userService;
+    private static readonly string[] data = ["Update failed."];
 
     public async Task<IActionResult> Index()
     {
@@ -117,15 +118,16 @@ public class ProjectsController(IProjectService projectService, IClientService c
         if (!ModelState.IsValid)
         {
             var errors = ModelState
-                .Where(x => x.Value.Errors.Count > 0)
+                .Where(x => x.Value!.Errors.Count > 0)
                 .ToDictionary(
                     kvp => kvp.Key,
-                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    kvp => kvp.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
                 );
 
             return Json(new { success = false, errors });
         }
 
+        // Chat Gpt4o
         // Handle image upload if a new image is provided
         if (model.ImageFile != null && model.ImageFile.Length > 0)
         {
@@ -145,7 +147,7 @@ public class ProjectsController(IProjectService projectService, IClientService c
         if (success.Succeeded)
             return Json(new { success = true });
 
-        return Json(new { success = false, errors = new { General = new[] { "Update failed." } } });
+        return Json(new { success = false, errors = new { General = data } });
     }
 
 
@@ -153,6 +155,8 @@ public class ProjectsController(IProjectService projectService, IClientService c
     private async Task<IEnumerable<Project>> SetProjectsAsync()
     {
         var projectResult = await _projectService.GetProjectAsync();
+
+        //chat Gpt4o
 
         // This was the source of the error - attempting to call SelectMany on a collection
         // that is already of the correct type

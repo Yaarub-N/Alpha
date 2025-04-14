@@ -62,27 +62,26 @@
     </form>
     <div class="login-link">
         Already have an account? <a asp-action="Login">Login</a>
-
-        @if (ViewBag.ErrorMessage != null)
-        {
-            <div class="form-error">
-                @ViewBag.ErrorMessage
-            </div>
-        }
+        <div id="form-error-message" class="form-error"></div>
         @section Scripts {
             <script src="~/js/validate.js" asp-append-version="true"></script>
 
             <script>
-                document.addEventListener("DOMContentLoaded", () => {
+                       document.addEventListener("DOMContentLoaded", () => {
                     const form = document.querySelector("#signup-form");
+                    const errorDiv = document.querySelector("#form-error-message");
+
                     if (!form) return;
 
                     form.addEventListener("submit", async (e) => {
                         e.preventDefault();
 
-                        // ✅ Kör validering på alla inputs
-                        let hasErrors = false;
+                   //Chat gpt 4o
+                        errorDiv.style.display = "none";
+                        errorDiv.textContent = "";
+
                         const fields = form.querySelectorAll("input[data-val='true']");
+                        let hasErrors = false;
                         fields.forEach(field => {
                             validateField(field);
                             if (field.classList.contains("input-validation-error")) {
@@ -90,13 +89,7 @@
                             }
                         });
 
-                        if (hasErrors) return; // 🛑 Stoppa submit om validering failar
-
-                        // Rensa gamla fel om det är lyckad
-                        form.querySelectorAll("span[data-valmsg-for]").forEach(span => {
-                            span.textContent = "";
-                            span.style.display = "none";
-                        });
+                        if (hasErrors) return;
 
                         const res = await fetch(form.action, {
                             method: "POST",
@@ -112,22 +105,24 @@
                             }
                         } else if (!res.ok && contentType?.includes("application/json")) {
                             const result = await res.json();
-                            if (result.errors) {
+                            if (result.errors?.Auth) {
+                                errorDiv.textContent = result.errors.Auth.join(", ");
+                                errorDiv.style.display = "block";
+                            } else {
+
                                 for (const field in result.errors) {
                                     const input = form.querySelector(`[name="${field}"]`);
                                     const span = form.querySelector(`span[data-valmsg-for="${field}"]`);
                                     if (span) {
                                         span.textContent = result.errors[field].join(", ");
-                                        span.classList.add("field-validation-error");
-                                        span.classList.remove("field-validation-valid");
                                         span.style.display = "block";
+                                        input?.classList.add("input-validation-error");
                                     }
-                                    input?.classList.add("input-validation-error");
                                 }
                             }
                         }
                     });
                 });
-            </script>
 
+            </script>
         }

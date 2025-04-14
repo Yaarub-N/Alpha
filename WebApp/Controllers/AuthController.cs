@@ -23,6 +23,7 @@ namespace WebApp.Controllers
         private readonly IUserService _userService = userService;
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
         private readonly UserManager<UserEntity> _userManager = userManager;
+        private static readonly string[] value = ["Email or password is incorrect."];
 
         [HttpGet("auth/signup")]
         public IActionResult SignUp(string returnUrl = "~/")
@@ -66,7 +67,7 @@ namespace WebApp.Controllers
             {
                 errors = new Dictionary<string, string[]>
         {
-            { "Email", new[] { authResult.ErrorMessage ?? "Something went wrong." } }
+                    {  "Auth", new[] { authResult.ErrorMessage ?? "Something went wrong." } }
         }
             });
         }
@@ -81,7 +82,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost("auth/login")]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = "~/")
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -104,11 +105,13 @@ namespace WebApp.Controllers
                 return Json(new { redirectUrl = Url.Content("~/admin/overview") });
             }
 
+            // chat gpt4o
+
             return BadRequest(new
             {
                 errors = new Dictionary<string, string[]>
         {
-            { "Auth", new[] { "Email or password is incorrect." } }
+            { "Auth", value }
         }
             });
         }

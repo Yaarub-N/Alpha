@@ -19,12 +19,15 @@
 <section id="clients-list">
 
 
-@foreach (var client in Model)
-{
-    @Html.Partial("~/Views/Shared/ListItems/_ClientListItemPartial.cshtml", client)
-}
-</section>
-@Html.Partial("~/Views/Shared/ClientsModals/_AddClientModal.cshtml", new AddClientForm())
+    <section id="clients-list">
+        @foreach (var client in Model)
+        {
+            <partial name="~/Views/Shared/ListItems/_ClientListItemPartial.cshtml" model="client" />
+        }
+    </section>
+
+
+    @await Html.PartialAsync("~/Views/Shared/ClientsModals/_AddClientModal.cshtml", new AddClientForm())
 
 @await Html.PartialAsync("~/Views/Shared/Validation/_ValidationScript.cshtml")
 

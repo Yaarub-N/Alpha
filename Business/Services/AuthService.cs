@@ -23,10 +23,11 @@ public class AuthService(SignInManager<UserEntity> signInManager, UserManager<Us
         if (formData == null)
             return new AuthResult { Succeeded = false, StatusCode = 400, ErrorMessage = "form data can't be null." };
 
-        var result = await _userService.CreatUserAsync(formData);
+        var result = await _userService.CreateUserAsync(formData);
+
         return result.Succeeded ?
             new AuthResult { Succeeded = true, StatusCode = 201 }
-            : new AuthResult { Succeeded = false, StatusCode = 409, ErrorMessage = "User creation failed." };
+            : new AuthResult { Succeeded = false, StatusCode = result.StatusCode, ErrorMessage = result.ErrorMessage };
     }
 
     public async Task<AuthResult> SignInAsync(SignInFormData formData)

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Presentation.Controllers;
+namespace WebApp.Controllers;
 
 [Authorize]
 public class UsersController(IUserService userService, AppDbContext context) : Controller

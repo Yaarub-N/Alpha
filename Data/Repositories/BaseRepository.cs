@@ -8,21 +8,16 @@ using System.Linq.Expressions;
 
 namespace Data.Repositories;
 
-public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity, TModel> where TEntity : class
+public abstract class BaseRepository<TEntity, TModel>(AppDbContext context) : IBaseRepository<TEntity, TModel> where TEntity : class
 {
-    protected readonly AppDbContext _context;
-    protected readonly DbSet<TEntity> _table;
-
-    protected BaseRepository(AppDbContext context)
-    {
-        _context = context;
-        _table = context.Set<TEntity>();
-    }
+    protected readonly AppDbContext _context = context;
+    protected readonly DbSet<TEntity> _table = context.Set<TEntity>();
 
     public virtual async Task<RepositoryResult<bool>> AddAsync(TEntity entity)
     {
         if (entity == null)
             return new RepositoryResult<bool> { Succeeded = false, statusCode = 400, ErrorMessage = "Entity can't be null." };
+
 
         try
         {
@@ -59,10 +54,14 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
             await _context.SaveChangesAsync();
             return new RepositoryResult<bool> { Succeeded = true, statusCode = 200 };
         }
+
+        //Claude
         catch (Exception ex)
         {
-            Debug.WriteLine(ex.Message);
-            return new RepositoryResult<bool> { Succeeded = false, statusCode = 500, ErrorMessage = ex.Message };
+            // Get the complete exception details including inner exceptions
+            var fullErrorMessage = ex.ToString();
+            Debug.WriteLine(fullErrorMessage);
+            return new RepositoryResult<bool> { Succeeded = false, statusCode = 500, ErrorMessage = fullErrorMessage };
         }
     }
 
@@ -114,7 +113,7 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
         //ChatGpt 4o
         var data = select != null
             ? await query.Select(select).ToListAsync()
-            : (await query.ToListAsync()).Select(x => x.MapTo<TModel>()).ToList();
+            : [.. (await query.ToListAsync()).Select(x => x.MapTo<TModel>())];
          
         //____
 
