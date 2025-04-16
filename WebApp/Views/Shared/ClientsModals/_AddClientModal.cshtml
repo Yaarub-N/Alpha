@@ -39,3 +39,41 @@
         </div>
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("#add-client-form");
+        if (!form) return;
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            const res = await fetch(form.action, {
+                method: "POST",
+                body: formData
+            });
+
+            const contentType = res.headers.get("content-type");
+
+            //chat Gpt 4o
+
+            if (!res.ok && contentType?.includes("application/json")) {
+                const result = await res.json();
+                if (result.errors) {
+                    for (const field in result.errors) {
+                        const span = form.querySelector(`span[data-valmsg-for="${field}"]`);
+                        if (span) {
+                            span.textContent = result.errors[field].join(", ");
+                            span.style.display = "block";
+                        }
+                    }
+                }
+                return;
+            }
+            if (res.ok && contentType?.includes("text/html")) {
+                window.location.reload();
+            }
+        });
+    });
+</script>

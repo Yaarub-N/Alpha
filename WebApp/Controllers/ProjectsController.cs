@@ -30,7 +30,6 @@ public class ProjectsController(IProjectService projectService, IClientService c
             },
             EditProjectFormData = new EditProjectViewModel
             {
-
                 Clients = await SetClientSelectListItemsAsync(),
                 Members = await SetUserSelectListItemsAsync(),
                 Statuses = await SetStatusSelectListItemsAsync()
@@ -41,6 +40,7 @@ public class ProjectsController(IProjectService projectService, IClientService c
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(AddProjectViewModel model)
     {
         if (!ModelState.IsValid)
@@ -51,7 +51,7 @@ public class ProjectsController(IProjectService projectService, IClientService c
                     kvp => kvp.Key,
                     kvp => kvp.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
                 );
-            return Json(new { success = false, errors });
+            return BadRequest(new { errors });
         }
 
         var dto = new AddProjectForm
@@ -64,7 +64,7 @@ public class ProjectsController(IProjectService projectService, IClientService c
             Budget = model.Budget,
             ClientId = model.ClientId,
             UserId = model.UserId,
-            StatusId = 1 // standard-status om inget annat anges
+            StatusId = 1
         };
 
         if (model.ImageFile != null && model.ImageFile.Length > 0)
@@ -85,32 +85,24 @@ public class ProjectsController(IProjectService projectService, IClientService c
 
         var result = await _projectService.AddProjectAsync(dto);
 
-        if (result != null && result.Succeeded)
+        if (!result.Succeeded)
         {
-            var createdProject = await _projectService.GetProjectByIdAsync(dto.Id);
-
-            // Create notification for the new project
-            var notificationService = HttpContext.RequestServices.GetRequiredService<INotificationService>();
-            await notificationService.AddNotificationAsync(new NotificationFormData
-            {
-                NotificationTypeId = 2, // Assuming 2 is for project notifications based on your code
-                NotificationTargetId = 1, // Set appropriate target ID
-                Message = $"New project '{model.ProjectName}' has been created",
-                Image = dto.ImageUrl
-            });
-
-            return Json(new
-            {
-                success = true,
-                project = createdProject.Result
-            });
+            return BadRequest(new { error = result.ErrorMessage });
         }
 
-        return Json(new { success = false, error = "Unable to create the project." });
+        var createdProject = await _projectService.GetProjectByIdAsync(dto.Id);
+
+        var notificationService = HttpContext.RequestServices.GetRequiredService<INotificationService>();
+        await notificationService.AddNotificationAsync(new NotificationFormData
+        {
+            NotificationTypeId = 2,
+            NotificationTargetId = 1,
+            Message = $"New project '{model.ProjectName}' has been created",
+            Image = dto.ImageUrl
+        });
+
+        return PartialView("~/Views/Shared/ListItems/_ProjectListItemPartial.cshtml", createdProject.Result);
     }
-
-
-
 
     [HttpPost]
     public async Task<IActionResult> Update(UpdateProjectForm model)
@@ -124,11 +116,9 @@ public class ProjectsController(IProjectService projectService, IClientService c
                     kvp => kvp.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
                 );
 
-            return Json(new { success = false, errors });
+            return BadRequest(new { errors });
         }
 
-        // Chat Gpt4o
-        // Handle image upload if a new image is provided
         if (model.ImageFile != null && model.ImageFile.Length > 0)
         {
             var fileName = Path.GetFileNameWithoutExtension(Path.GetRandomFileName());
@@ -144,27 +134,20 @@ public class ProjectsController(IProjectService projectService, IClientService c
         }
 
         var success = await _projectService.UpdateProjectAsync(model);
-        if (success.Succeeded)
-            return Json(new { success = true });
+        if (!success.Succeeded)
+        {
+            return BadRequest(new { error = success.ErrorMessage });
+        }
 
-        return Json(new { success = false, errors = new { General = data } });
+        return Json(new { success = true });
     }
-
-
 
     private async Task<IEnumerable<Project>> SetProjectsAsync()
     {
         var projectResult = await _projectService.GetProjectAsync();
-
-        //chat Gpt4o
-
-        // This was the source of the error - attempting to call SelectMany on a collection
-        // that is already of the correct type
         var projects = projectResult?.Result ?? [];
-
         return projects.OrderByDescending(x => x.Created);
     }
-
 
     private async Task<IEnumerable<SelectListItem>> SetClientSelectListItemsAsync()
     {
@@ -172,13 +155,11 @@ public class ProjectsController(IProjectService projectService, IClientService c
         var clients = clientResult?.Result ?? [];
         clients = clients.OrderBy(x => x.ClientName);
 
-        var selectListItems = clients.Select(client => new SelectListItem
+        return clients.Select(client => new SelectListItem
         {
             Value = client.Id,
             Text = client.ClientName
         });
-
-        return selectListItems;
     }
 
     private async Task<IEnumerable<SelectListItem>> SetUserSelectListItemsAsync()
@@ -186,32 +167,26 @@ public class ProjectsController(IProjectService projectService, IClientService c
         var userResult = await _userService.GetAllUsersAsync();
         var users = userResult?.Result ?? [];
 
-        users = users.OrderBy(x => x.FirstName).ThenBy(x => x.LastName);
-
-        var selectListItems = users.Select(user => new SelectListItem
-        {
-            Value = user.Id,
-            Text = $"{user.FirstName} {user.LastName}"
-        });
-
-        return selectListItems;
+        return users.OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
+            .Select(user => new SelectListItem
+            {
+                Value = user.Id,
+                Text = $"{user.FirstName} {user.LastName}"
+            });
     }
 
     private async Task<IEnumerable<SelectListItem>> SetStatusSelectListItemsAsync()
     {
         var statusResult = await _statusService.GetStatusAsync();
         var statuses = statusResult?.Result ?? [];
-        statuses = statuses.OrderBy(x => x.Id);
 
-        var selectListItems = statuses.Select(status => new SelectListItem
-        {
-            Value = status.Id.ToString(),
-            Text = status.StatusName
-        });
-
-        return selectListItems;
+        return statuses.OrderBy(x => x.Id)
+            .Select(status => new SelectListItem
+            {
+                Value = status.Id.ToString(),
+                Text = status.StatusName
+            });
     }
-
 
     [HttpPost]
     public async Task<IActionResult> Delete(string id)
@@ -226,13 +201,13 @@ public class ProjectsController(IProjectService projectService, IClientService c
     [HttpPost]
     public async Task<IActionResult> AddMember(string projectId, string userId)
     {
-        // validera + uppdatera projektet i databasen
         var result = await _projectService.AddMemberToProjectAsync(projectId, userId);
         if (result.Succeeded)
             return Json(new { success = true });
-    
+
         return Json(new { success = false, error = result.ErrorMessage });
     }
+
     [HttpGet]
     public async Task<IActionResult> GetProject(string id)
     {
@@ -240,16 +215,6 @@ public class ProjectsController(IProjectService projectService, IClientService c
         if (!result.Succeeded || result.Result == null)
             return Json(new { success = false });
 
-        return Json(new
-        {
-            success = true,
-            project = result.Result
-        });
+        return Json(new { success = true, project = result.Result });
     }
-
-
-
-
 }
-
-

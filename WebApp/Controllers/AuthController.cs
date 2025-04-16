@@ -23,16 +23,16 @@ namespace WebApp.Controllers
         private readonly IUserService _userService = userService;
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
         private readonly UserManager<UserEntity> _userManager = userManager;
-        private static readonly string[] value = ["Email or password is incorrect."];
+
+        private static readonly string[] genericErrorMessage = ["Email or password is incorrect."];
 
         [HttpGet("auth/signup")]
         public IActionResult SignUp(string returnUrl = "~/")
         {
-
             ViewBag.ReturnUrl = returnUrl;
-            ViewBag.ErrorMessage = "";
             return View();
         }
+
         [HttpPost("auth/signup")]
         public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
@@ -49,10 +49,10 @@ namespace WebApp.Controllers
                 });
             }
 
-            var signUpFormData = model.MapTo<SignUpFormData>();
-            var authResult = await _authService.SignUpAsync(signUpFormData);
+            var formData = model.MapTo<SignUpFormData>();
+            var result = await _authService.SignUpAsync(formData);
 
-            if (authResult.Succeeded)
+            if (result.Succeeded)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user != null)
@@ -62,22 +62,19 @@ namespace WebApp.Controllers
 
                 return Json(new { redirectUrl = Url.Content("~/admin/overview") });
             }
-
+            //chat gpt 4o
             return BadRequest(new
             {
-                errors = new Dictionary<string, string[]>
-        {
-                    {  "Auth", new[] { authResult.ErrorMessage ?? "Something went wrong." } }
-        }
+                errors = new Dictionary<string, string[]> {
+                    { "Auth", new[] { result.ErrorMessage ?? "Something went wrong." } }
+                }
             });
         }
-
 
         [HttpGet("auth/login")]
         public IActionResult Login(string returnUrl = "~/")
         {
             ViewBag.ReturnUrl = returnUrl;
-            ViewBag.ErrorMessage = "";
             return View();
         }
 
@@ -97,31 +94,26 @@ namespace WebApp.Controllers
                 });
             }
 
-            var signInFormData = model.MapTo<SignInFormData>();
-            var authResult = await _authService.SignInAsync(signInFormData);
+            var formData = model.MapTo<SignInFormData>();
+            var result = await _authService.SignInAsync(formData);
 
-            if (authResult.Succeeded)
+            if (result.Succeeded)
             {
                 return Json(new { redirectUrl = Url.Content("~/admin/overview") });
             }
 
-            // chat gpt4o
-
             return BadRequest(new
             {
-                errors = new Dictionary<string, string[]>
-        {
-            { "Auth", value }
-        }
+                errors = new Dictionary<string, string[]> {
+                    { "Auth", genericErrorMessage }
+                }
             });
         }
-
 
         [HttpPost("auth/externalsignin")]
         public IActionResult ExternalSignIn(string provider, string? returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
             if (string.IsNullOrEmpty(provider))
             {
                 ModelState.AddModelError("provider", "Invalid Provider.");
@@ -133,88 +125,76 @@ namespace WebApp.Controllers
             return Challenge(properties, provider);
         }
 
-   
+        [HttpGet("auth/externallogincallback")]
         public async Task<IActionResult> ExternalLoginCallback(string? returnUrl = null, string? remoteError = null)
         {
             returnUrl ??= Url.Content("~/");
 
+            
             if (!string.IsNullOrEmpty(remoteError))
             {
-                ModelState.AddModelError("", $"remoteError: {remoteError}");
+                ModelState.AddModelError("", $"Remote error: {remoteError}");
                 return View("Login");
             }
+
 
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
+                return RedirectToAction("Login");
+
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            if (string.IsNullOrWhiteSpace(email))
             {
-                return RedirectToAction("Login");  //null
-            }
-
-            var signInResult = await _signInManager.ExternalLoginSignInAsync(
-                info.LoginProvider,
-                info.ProviderKey,
-                isPersistent: false,
-                bypassTwoFactor: true
-            );
-
-            if (signInResult.Succeeded)
-            {
-                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                var userEntity = await _userManager.FindByEmailAsync(email!);
-
-                if (userEntity != null)
-                {
-                    await _signInManager.SignInAsync(userEntity, isPersistent: false);
-                    var notification = new NotificationFormData
-                    {
-                        NotificationTypeId = 1,
-                        NotificationTargetId = 1,
-                        Message = $"{userEntity.FirstName} {userEntity.LastName} signed in.",
-                    
-                    };
-                    await _notificationService.AddNotificationAsync(notification);
-                }
-
-                return LocalRedirect(returnUrl);
-            }
-            else
-            {
-                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName);
-                var lastName = info.Principal.FindFirstValue(ClaimTypes.Surname);
-
-                var user = new UserEntity
-                {
-                    Email = email,
-                    UserName = email,
-                    FirstName = firstName,
-                    LastName = lastName
-                };
-                //chat Gpt 4o
-                var identityResult = await _userManager.CreateAsync(user);
-                if (identityResult.Succeeded)
-                {
-                    await _userManager.AddLoginAsync(user, info);
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
-                    var notification = new NotificationFormData
-                    {
-                        NotificationTypeId = 1,
-                        NotificationTargetId = 1,
-                        Message = $"{user.FirstName} {user.LastName} signed in.",
-                    
-                    };
-                    await _notificationService.AddNotificationAsync(notification);
-
-                    return LocalRedirect(returnUrl);
-                }
-
-                foreach (var error in identityResult.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                ModelState.AddModelError("", "Email not found from provider.");
                 return View("Login");
             }
+
+            var existingUser = await _userManager.FindByEmailAsync(email);
+            if (existingUser != null)
+            {
+               
+                var logins = await _userManager.GetLoginsAsync(existingUser);
+                if (!logins.Any(l => l.LoginProvider == info.LoginProvider && l.ProviderKey == info.ProviderKey))
+                {
+                    await _userManager.AddLoginAsync(existingUser, info);
+                }
+
+                await _signInManager.SignInAsync(existingUser, isPersistent: false);
+                return LocalRedirect(returnUrl);
+            }
+
+            var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName);
+            var lastName = info.Principal.FindFirstValue(ClaimTypes.Surname);
+
+            var newUser = new UserEntity
+            {
+                Email = email,
+                UserName = email,
+                FirstName = firstName ?? "",
+                LastName = lastName ?? ""
+            };
+
+            var createResult = await _userManager.CreateAsync(newUser);
+            if (!createResult.Succeeded)
+            {
+                foreach (var error in createResult.Errors)
+                    ModelState.AddModelError("", error.Description);
+
+                return View("Login");
+            }
+
+            await _userManager.AddToRoleAsync(newUser, "User");
+            await _userManager.AddLoginAsync(newUser, info);
+            await _signInManager.SignInAsync(newUser, isPersistent: false);
+
+            await _notificationService.AddNotificationAsync(new NotificationFormData
+            {
+                NotificationTypeId = 1,
+                NotificationTargetId = 1,
+                Message = $"{newUser.FirstName} {newUser.LastName} signed in."
+            });
+
+            return LocalRedirect(returnUrl);
         }
 
         [HttpGet("auth/logout")]

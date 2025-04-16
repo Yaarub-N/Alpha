@@ -29,46 +29,5 @@
 @await Html.PartialAsync("ProjectModals/_EditProjectModalPartial", Model.EditProjectFormData)
 
 
-<script src="~/js/validate.js"></script>
-<script>
-    document.querySelector("#add-project-modal form").addEventListener("submit", async function (e) {
-        e.preventDefault();
 
-        const form = e.target;
-        const formData = new FormData(form);
-
-        const response = await fetch("/Projects/Create", {
-            method: "POST",
-            body: formData
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            location.reload();
-        } else {
-            showValidationErrors(result.errors);
-        }
-    });
-
-    document.querySelector("#edit-project-modal form").addEventListener("submit", async function (e) {
-        e.preventDefault();
-
-        const form = e.target;
-        const formData = new FormData(form);
-
-        const response = await fetch("/Projects/Update", {
-            method: "POST",
-            body: formData
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            location.reload();
-        } else {
-            showValidationErrors(result.errors);
-        }
-    });
-
-</script>
+@await Html.PartialAsync("~/Views/Shared/Validation/_ValidationScript.cshtml")

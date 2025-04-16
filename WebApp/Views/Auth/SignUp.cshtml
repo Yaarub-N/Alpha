@@ -8,15 +8,18 @@
 
 <div class="form-container">
     <h1>Create Account</h1>
- 
-        <form asp-controller="Auth" asp-action="ExternalSignIn" method="post">
-            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
-            <button class="googlebox" type="submit" name="provider" value="Google">  <img src="~/images/google-icon.svg" alt="google icon" />  Login with Google</button>
-        </form>
+
+    <form asp-controller="Auth" asp-action="ExternalSignIn" method="post">
+        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+        <button class="googlebox" type="submit" name="provider" value="Google">
+            <img src="~/images/google-icon.svg" alt="google icon" /> Login with Google
+        </button>
+    </form>
+
 
     <span class="or">OR</span>
 
-    <form id="signup-form" method="post" asp-controller="Auth" asp-action="SignUp" data-ajax="true" novalidate>
+    <form id="signup-form" method="post" asp-controller="Auth" asp-action="SignUp"  novalidate>
 
 
         <div class="form-group">
@@ -64,33 +67,43 @@
         Already have an account? <a asp-action="Login">Login</a>
         <div id="form-error-message" class="form-error"></div>
         @section Scripts {
-            <script src="~/js/validate.js" asp-append-version="true"></script>
+        <script src="~/js/validate.js" asp-append-version="true"></script>
 
-            <script>
-                       document.addEventListener("DOMContentLoaded", () => {
-                    const form = document.querySelector("#signup-form");
-                    const errorDiv = document.querySelector("#form-error-message");
+        <script>
+            //chat gpt 4o
+            let isSubmitting = false;
 
-                    if (!form) return;
+            document.addEventListener("DOMContentLoaded", () => {
+                const form = document.querySelector("#signup-form");
+                const errorDiv = document.querySelector("#form-error-message");
 
-                    form.addEventListener("submit", async (e) => {
-                        e.preventDefault();
+                if (!form) return;
 
-                   //Chat gpt 4o
-                        errorDiv.style.display = "none";
-                        errorDiv.textContent = "";
+                form.addEventListener("submit", async (e) => {
+                    e.preventDefault();
 
-                        const fields = form.querySelectorAll("input[data-val='true']");
-                        let hasErrors = false;
-                        fields.forEach(field => {
-                            validateField(field);
-                            if (field.classList.contains("input-validation-error")) {
-                                hasErrors = true;
-                            }
-                        });
+                    if (isSubmitting) return;
+                    isSubmitting = true;
 
-                        if (hasErrors) return;
+                    errorDiv.style.display = "none";
+                    errorDiv.textContent = "";
 
+                    const fields = form.querySelectorAll("input[data-val='true']");
+                    let hasErrors = false;
+
+                    fields.forEach(field => {
+                        validateField(field);
+                        if (field.classList.contains("input-validation-error")) {
+                            hasErrors = true;
+                        }
+                    });
+
+                    if (hasErrors) {
+                        isSubmitting = false;
+                        return;
+                    }
+
+                    try {
                         const res = await fetch(form.action, {
                             method: "POST",
                             body: new FormData(form)
@@ -109,7 +122,6 @@
                                 errorDiv.textContent = result.errors.Auth.join(", ");
                                 errorDiv.style.display = "block";
                             } else {
-
                                 for (const field in result.errors) {
                                     const input = form.querySelector(`[name="${field}"]`);
                                     const span = form.querySelector(`span[data-valmsg-for="${field}"]`);
@@ -121,8 +133,15 @@
                                 }
                             }
                         }
-                    });
+                    } catch (err) {
+                        console.error("Network error:", err);
+                    } finally {
+                        isSubmitting = false; 
+                    }
                 });
+            });
+        </script>
+}
 
-            </script>
-        }
+
+       

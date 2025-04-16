@@ -6,6 +6,7 @@ using Domain.Extentions;
 using Domain.Models;
 using Domain.Responses;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Services
 {
@@ -14,6 +15,9 @@ namespace Business.Services
         private readonly IUserRepository _userRepository = userRepository;
         private readonly RoleManager<IdentityRole> _roleManager = roleManager;
         private readonly UserManager<UserEntity> _userManager = userManager;
+
+        //chat Gpt 4o
+        private static readonly SemaphoreSlim _signupLock = new(1, 1);
 
         public async Task<UserResult<IEnumerable<User>>> GetAllUsersAsync()
         {
@@ -64,58 +68,74 @@ namespace Business.Services
 
             return new UserResult { Succeeded = true, StatusCode = 200 };
         }
-
         public async Task<UserResult> CreateUserAsync(SignUpFormData form, string roleName = "User")
         {
             if (form == null)
                 return new UserResult { Succeeded = false, StatusCode = 400, ErrorMessage = "Form data can't be null." };
-
-            // Kontrollera om användaren redan finns med samma e-postadress
-            var existingUserByEmail = await _userManager.FindByEmailAsync(form.Email);
-            if (existingUserByEmail != null)
-            {
-                return new UserResult { Succeeded = false, StatusCode = 409, ErrorMessage = "User with this email already exists." };
-            }
+            //chat gpt 4o
+            await _signupLock.WaitAsync(); 
 
             try
             {
+               
+                var normalizedEmail = _userManager.NormalizeEmail(form.Email);
+                var normalizedUsername = _userManager.NormalizeName(form.Email); 
+
+                // Kontrollera om användaren redan finns i databasen
+                var userExists = await _userManager.Users
+                    .AnyAsync(u =>
+                        u.NormalizedEmail == normalizedEmail ||
+                        u.NormalizedUserName == normalizedUsername);
+
+                if (userExists)
+                {
+                    return new UserResult
+                    {
+                        Succeeded = false,
+                        StatusCode = 409,
+                        ErrorMessage = "User with this email or username already exists."
+                    };
+                }
                 var userEntity = form.MapTo<UserEntity>();
+                userEntity.UserName = form.Email;
+                userEntity.Email = form.Email;
 
-                // Se till att användarnamnet är e-postadressen och normalize email
-                userEntity.UserName = form.Email; // Här används e-post som användarnamn
-                userEntity.NormalizedEmail = form.Email.ToUpper(); // Normalized version of the email
-                userEntity.NormalizedUserName = form.Email.ToUpper(); // Det är viktigt att sätta samma normaliserade värde här
-
-                // Skapa användaren
                 var createResult = await _userManager.CreateAsync(userEntity, form.Password);
-
                 if (!createResult.Succeeded)
                 {
-                    var errors = string.Join(", ", createResult.Errors.Select(e => e.Description));
-                    return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = errors };
+                    var errorMsg = string.Join(", ", createResult.Errors.Select(e => e.Description));
+                    return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = errorMsg };
                 }
-
-                // Kontrollera om rollen finns
                 var roleExists = await _roleManager.RoleExistsAsync(roleName);
                 if (!roleExists)
                 {
                     return new UserResult { Succeeded = true, StatusCode = 404, ErrorMessage = $"Role '{roleName}' does not exist." };
                 }
 
-                // Lägg till användaren i rollen
                 var roleResult = await _userManager.AddToRoleAsync(userEntity, roleName);
                 if (!roleResult.Succeeded)
                 {
-                    return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = "User created but failed to add role." };
+                    return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = "User created but failed to assign role." };
                 }
 
                 return new UserResult { Succeeded = true, StatusCode = 201 };
             }
             catch (Exception ex)
             {
-                return new UserResult { Succeeded = false, StatusCode = 500, ErrorMessage = ex.Message };
+                return new UserResult
+                {
+                    Succeeded = false,
+                    StatusCode = 500,
+                    ErrorMessage = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+            finally
+            {
+                //chat Gpt4o
+                _signupLock.Release(); 
             }
         }
+
 
 
         public async Task<string> GetDisplayName(string userId)

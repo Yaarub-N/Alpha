@@ -8,7 +8,8 @@
         </div>
         <div class="card-body">
 
-            <form asp-controller="Projects" asp-action="Create" method="post" enctype="multipart/form-data" novalidate>
+            <form id="add-project-form" asp-controller="Projects" asp-action="Create" method="post" enctype="multipart/form-data" novalidate>
+
        
                 <div class="form-group">
                     <label asp-for="ImageFile" class="form-label">Project Image</label>
@@ -25,10 +26,11 @@
                 <div class="form-group">
                     <label asp-for="ProjectName" class="form-label"></label>
                     <input asp-for="ProjectName" class="form-input" />
-                    <span asp-validation-for="ProjectName"></span>
+                    <span asp-validation-for="ProjectName" class="field-validation-error" data-valmsg-for="ProjectName"></span>
                 </div>
 
                 <div class="form-group">
+                    <span asp-validation-for="ClientId" class="field-validation-error" data-valmsg-for="ClientId"></span>
                     <label asp-for="ClientId" class="form-label">Client Name</label>
                     <div class="form-select" data-placeholder="Choose a client">
                         <button type="button" class="form-select-trigger">
@@ -41,6 +43,7 @@
                             }
                         </ul>
                         <input type="hidden" asp-for="ClientId" />
+                     
                     </div>
                 </div>
                 <div class="form-group">
@@ -73,15 +76,19 @@
                     <div class="form-group">
                         <label asp-for="StartDate" class="form-label"></label>
                         <input asp-for="StartDate" class="form-input" type="date" />
+                        <span asp-validation-for="StartDate" class="field-validation-error" data-valmsg-for="StartDate"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="EndDate" class="form-label"></label>
                         <input asp-for="EndDate" class="form-input" type="date" />
+                        <span asp-validation-for="StartDate" class="field-validation-error" data-valmsg-for="StartDate"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="UserId" class="form-label"></label>
+                    <span asp-validation-for="UserId" class="field-validation-error" data-valmsg-for="UserId"></span>
                     <div class="form-select" data-placeholder="Choose a member">
+              
                         <button type="button" class="form-select-trigger">
                             <span class="form-select-text"></span>
                         </button>
@@ -92,6 +99,7 @@
                             }
                         </ul>
                         <input type="hidden" asp-for="UserId" />
+                     
                     </div>
                 </div>
                 <div class="form-group">
@@ -99,6 +107,7 @@
                     <div class="form-input-extended">
                         <i class="fa-duotone fa-dollar-sign"></i>
                         <input asp-for="Budget" class="form-input" type="text" />
+                        <span asp-validation-for="Budget" class="field-validation-error" data-valmsg-for="Budget"></span>
                     </div>
                 </div>
 
@@ -108,3 +117,42 @@
         </div>
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("#add-project-form");
+        if (!form) return;
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            const res = await fetch(form.action, {
+                method: "POST",
+                body: formData
+            });
+
+            const contentType = res.headers.get("content-type");
+
+    
+            if (!res.ok && contentType?.includes("application/json")) {
+                const result = await res.json();
+                if (result.errors) {
+                    for (const field in result.errors) {
+                        const span = form.querySelector(`span[data-valmsg-for="${field}"]`);
+                        if (span) {
+                            span.textContent = result.errors[field].join(", ");
+                            span.style.display = "block";
+                        }
+                    }
+                }
+                return;
+            }
+
+      
+            if (res.ok && contentType?.includes("text/html")) {
+                window.location.reload();
+            }
+        });
+    });
+</script>
